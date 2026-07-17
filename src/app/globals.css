@@ -13,3 +13,16 @@ input,
 button {
   font-family: var(--font-montserrat), 'Arial';
 }
+
+a {
+  text-decoration: none;
+}
+
+input,
+button {
+  outline: none;
+}
+
+ul li {
+  list-style-type: none;
+}
