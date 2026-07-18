@@ -2,7 +2,7 @@ import cn from 'classnames';
 import Link from 'next/link';
 import style from './page.module.css';
 
-export default function Signin() {
+export default function SignUp() {
   return (
     <>
       <div className={style.wrapper}>
@@ -21,16 +21,21 @@ export default function Signin() {
                 placeholder="Почта"
               />
               <input
-                className={cn(style.modal__input)}
+                className={style.modal__input}
                 type="password"
                 name="password"
                 placeholder="Пароль"
               />
-              <div className={style.errorContainer}>{/*Блок для ошибок*/}</div>
-              <button className={style.modal__btnEnter}>Войти</button>
-              <Link href={'sign-up'} className={style.modal__btnSignup}>
+              <input
+                className={style.modal__input}
+                type="password"
+                name="password"
+                placeholder="Повторите пароль"
+              />
+              <div className={style.errorContainer}></div>
+              <button className={style.modal__btnSignupEnt}>
                 Зарегистрироваться
-              </Link>
+              </button>
             </form>
           </div>
         </div>
