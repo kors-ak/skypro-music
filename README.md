@@ -1,24 +1,98 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SkyPro Music
 
-## Getting Started
+_Учебный проект по frontend-разработке_
 
-First, run the development server:
+Веб-приложение для прослушивания музыки с персональным аккаунтом пользователя.  
+Сервис позволяет просматривать каталог треков, управлять воспроизведением через встроенный плеер, добавлять композиции в избранное и изучать тематические подборки.
+
+## Функциональность
+
+### Авторизация и регистрация
+
+- Регистрация нового пользователя.
+- Авторизация существующего пользователя.
+- Выход из аккаунта.
+- Валидация данных форм.
+- Обработка ошибок при работе с аккаунтом.
+
+### Каталог музыки
+
+- Просмотр доступных треков.
+- Отображение информации о композициях:
+  - название трека;
+  - исполнитель;
+  - альбом;
+  - длительность.
+
+### Музыкальный плеер
+
+Встроенный аудиоплеер с возможностями:
+
+- воспроизведение и постановка трека на паузу;
+- перемотка композиции;
+- переключение между треками;
+- повтор текущего трека;
+- случайное воспроизведение треков (Shuffle);
+- отображение текущего прогресса воспроизведения.
+
+### Избранное
+
+- Добавление треков в избранное.
+- Удаление треков из избранного.
+- Просмотр списка понравившихся композиций.
+
+### Подборки
+
+- Просмотр готовых музыкальных подборок.
+- Работа с коллекциями треков по категориям.
+
+### Дополнительные возможности
+
+- Отображение состояния загрузки.
+- Навигация между страницами приложения.
+- Страница 404 для несуществующих маршрутов.
+
+## Технологии
+
+- HTML5
+- CSS3
+- TypeScript
+- Next.js
+- CSS Modules
+- REST API
+- ESLint
+- Prettier
+- Git
+- GitHub
+
+## Установка и запуск
+
+### Клонирование репозитория
+
+```bash
+git clone https://github.com/kors-ak/skypro-music.git
+```
+
+### Установка зависимостей
+
+```bash
+npm install
+```
+
+### Запуск проекта
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Приложение будет доступно по адресу:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```text
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+
+
 
 ## Learn More
 
