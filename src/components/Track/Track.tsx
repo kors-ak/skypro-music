@@ -4,6 +4,7 @@ import style from './track.module.css';
 type TrackProps = {
   track: {
     title: string;
+    subtitle?: string;
     author: string;
     album: string;
     time: string;
@@ -22,7 +23,10 @@ export default function Track({ track }: TrackProps) {
           </div>
           <div>
             <Link className={style.track__titleLink} href="">
-              {track.title} <span className={style.track__titleSpan}></span>
+              {track.title}{' '}
+              {track.subtitle && (
+                <span className={style.track__titleSpan}>{track.subtitle}</span>
+              )}
             </Link>
           </div>
         </div>

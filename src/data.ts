@@ -2,6 +2,7 @@ export const tracks = [
   {
     id: 1,
     title: 'Guilt',
+    subtitle: '',
     author: 'Nero',
     album: 'Welcome Reality',
     time: '4:44',
@@ -9,6 +10,7 @@ export const tracks = [
   {
     id: 2,
     title: 'Elektro',
+    subtitle: '',
     author: 'Dynoro, Outwork, Mr. Gee',
     album: 'Elektro',
     time: '2:22',
@@ -16,6 +18,7 @@ export const tracks = [
   {
     id: 3,
     title: "I'm Fire",
+    subtitle: '',
     author: 'Ali Bakgor',
     album: "I'm Fire",
     time: '2:22',
