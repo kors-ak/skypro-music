@@ -1,21 +1,12 @@
 import cn from 'classnames';
 import Link from 'next/link';
+import Search from '../Search/Search';
 import style from './centerblock.module.css';
 
 export default function CenterBlock() {
   return (
     <div className={style.centerblock}>
-      <div className={style.centerblock__search}>
-        <svg className={style.search__svg}>
-          <use xlinkHref="/img/icon/sprite.svg#icon-search"></use>
-        </svg>
-        <input
-          className={style.search__text}
-          type="search"
-          placeholder="Поиск"
-          name="search"
-        />
-      </div>
+      <Search />
       <h2 className={style.centerblock__h2}>Треки</h2>
       <div className={style.centerblock__filter}>
         <div className={style.filter__title}>Искать по:</div>
