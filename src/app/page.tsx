@@ -1,5 +1,5 @@
 import Bar from '@/components/Bar/Bar';
-import Centerblock from '@/components/Centerblock/Centerblock';
+import CenterBlock from '@/components/CenterBlock/CenterBlock';
 import Nav from '@/components/Nav/Nav';
 import Sidebar from '@/components/Sidebar/Sidebar';
 import style from './page.module.css';
@@ -10,7 +10,7 @@ export default function Home() {
       <div className={style.container}>
         <main className={style.main}>
           <Nav />
-          <Centerblock />
+          <CenterBlock />
           <Sidebar />
         </main>
 

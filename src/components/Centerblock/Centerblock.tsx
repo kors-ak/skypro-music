@@ -2,7 +2,7 @@ import cn from 'classnames';
 import Link from 'next/link';
 import style from './centerblock.module.css';
 
-export default function Centerblock() {
+export default function CenterBlock() {
   return (
     <div className={style.centerblock}>
       <div className={style.centerblock__search}>
