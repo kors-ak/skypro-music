@@ -1,14 +1,10 @@
+import { TrackType } from '@/sharedTypes/sharedTypes';
+import { formatDuration } from '@/utils/formatDuration';
 import Link from 'next/link';
 import style from './track.module.css';
 
 type TrackProps = {
-  track: {
-    title: string;
-    subtitle?: string;
-    author: string;
-    album: string;
-    time: string;
-  };
+  track: TrackType;
 };
 
 export default function Track({ track }: TrackProps) {
@@ -23,10 +19,7 @@ export default function Track({ track }: TrackProps) {
           </div>
           <div>
             <Link className={style.track__titleLink} href="">
-              {track.title}{' '}
-              {track.subtitle && (
-                <span className={style.track__titleSpan}>{track.subtitle}</span>
-              )}
+              {track.name}
             </Link>
           </div>
         </div>
@@ -44,7 +37,9 @@ export default function Track({ track }: TrackProps) {
           <svg className={style.track__timeSvg}>
             <use xlinkHref="/img/icon/sprite.svg#icon-like"></use>
           </svg>
-          <span className={style.track__timeText}>{track.time}</span>
+          <span className={style.track__timeText}>
+            {formatDuration(track.duration_in_seconds)}
+          </span>
         </div>
       </div>
     </div>
