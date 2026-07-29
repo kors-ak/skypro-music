@@ -1,4 +1,4 @@
-import { TrackType } from './sharedTypes/sharedTypes';
+import { TrackType } from './sharedTypes/sharedTypes'
 
 export const data: TrackType[] = [
   {
@@ -132,4 +132,4 @@ export const data: TrackType[] = [
       'https://webdev-music-003b5b991590.herokuapp.com/media/music_files/Winniethemoog_-_Action_Sport_Breakbeat.mp3',
     stared_user: [],
   },
-];
+]

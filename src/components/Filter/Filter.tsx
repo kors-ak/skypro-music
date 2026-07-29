@@ -1,4 +1,4 @@
-import style from './filter.module.css';
+import style from './filter.module.css'
 
 export default function Filter() {
   return (
@@ -8,5 +8,5 @@ export default function Filter() {
       <div className={style.filter__button}>году выпуска</div>
       <div className={style.filter__button}>жанру</div>
     </div>
-  );
+  )
 }

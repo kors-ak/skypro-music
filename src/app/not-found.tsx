@@ -1,7 +1,7 @@
-import Bar from '@/components/Bar/Bar';
-import Image from 'next/image';
-import Link from 'next/link';
-import style from './not-found.module.css';
+import Bar from '@/components/Bar/Bar'
+import Image from 'next/image'
+import Link from 'next/link'
+import style from './not-found.module.css'
 
 export default function NotFound() {
   return (
@@ -32,5 +32,5 @@ export default function NotFound() {
         <Bar />
       </div>
     </div>
-  );
+  )
 }

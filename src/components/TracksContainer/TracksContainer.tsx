@@ -1,7 +1,7 @@
-import { data } from '@/data';
-import cn from 'classnames';
-import Track from '../Track/Track';
-import style from './trackscontainer.module.css';
+import { data } from '@/data'
+import cn from 'classnames'
+import Track from '../Track/Track'
+import style from './trackscontainer.module.css'
 
 export default function TracksContainer() {
   return (
@@ -24,5 +24,5 @@ export default function TracksContainer() {
         ))}
       </div>
     </div>
-  );
+  )
 }

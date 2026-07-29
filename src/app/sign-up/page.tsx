@@ -1,6 +1,6 @@
-import cn from 'classnames';
-import Link from 'next/link';
-import style from './page.module.css';
+import cn from 'classnames'
+import Link from 'next/link'
+import style from './page.module.css'
 
 export default function SignUp() {
   return (
@@ -41,5 +41,5 @@ export default function SignUp() {
         </div>
       </div>
     </>
-  );
+  )
 }

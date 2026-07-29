@@ -1,6 +1,6 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import style from './nav.module.css';
+import Image from 'next/image'
+import Link from 'next/link'
+import style from './nav.module.css'
 
 export default function Nav() {
   return (
@@ -39,5 +39,5 @@ export default function Nav() {
         </ul>
       </div>
     </nav>
-  );
+  )
 }

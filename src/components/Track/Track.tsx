@@ -1,11 +1,11 @@
-import { TrackType } from '@/sharedTypes/sharedTypes';
-import { formatDuration } from '@/utils/formatDuration';
-import Link from 'next/link';
-import style from './track.module.css';
+import { TrackType } from '@/sharedTypes/sharedTypes'
+import { formatDuration } from '@/utils/formatDuration'
+import Link from 'next/link'
+import style from './track.module.css'
 
 type TrackProps = {
-  track: TrackType;
-};
+  track: TrackType
+}
 
 export default function Track({ track }: TrackProps) {
   return (
@@ -43,5 +43,5 @@ export default function Track({ track }: TrackProps) {
         </div>
       </div>
     </div>
-  );
+  )
 }

@@ -1,14 +1,14 @@
-'use client';
+'use client'
 
-import { useState } from 'react';
-import style from './search.module.css';
+import { useState } from 'react'
+import style from './search.module.css'
 
 export default function Search() {
-  const [searchValue, setSearchValue] = useState('');
+  const [searchValue, setSearchValue] = useState('')
 
   const onSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(e.target.value);
-  };
+    setSearchValue(e.target.value)
+  }
 
   return (
     <div className={style.centerblock__search}>
@@ -24,5 +24,5 @@ export default function Search() {
         onChange={onSearchChange}
       />
     </div>
-  );
+  )
 }

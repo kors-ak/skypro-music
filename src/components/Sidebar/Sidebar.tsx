@@ -1,6 +1,6 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import style from './sidebar.module.css';
+import Image from 'next/image'
+import Link from 'next/link'
+import style from './sidebar.module.css'
 
 export default function Sidebar() {
   return (
@@ -51,5 +51,5 @@ export default function Sidebar() {
         </div>
       </div>
     </div>
-  );
+  )
 }
