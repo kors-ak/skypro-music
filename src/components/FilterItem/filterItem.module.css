@@ -16,6 +16,7 @@
   cursor: pointer;
   color: #fff;
   margin-right: 10px;
+  transition: all 0.1s;
 }
 
 .filter__button:hover {
@@ -67,12 +68,12 @@
 }
 
 .item:hover {
-  color: #b672ff;
+  color: rgb(217, 182, 255);
   text-decoration: underline;
   text-underline-offset: 4px;
 }
 
 .itemSelected {
   font-weight: bold;
-  color: #b672ff;
+  color: rgb(182, 114, 255);
 }
