@@ -1,6 +1,11 @@
+'use client';
+
+import { useState } from 'react';
 import style from './search.module.css';
 
 export default function Search() {
+  const [serchValue, setSearchValue] = useState('');
+
   return (
     <div className={style.centerblock__search}>
       <svg className={style.search__svg}>
