@@ -1,6 +1,24 @@
 .main__nav {
   width: 244px;
   padding: 20px 0 20px 36px;
+
+  position: relative;
+  overflow: hidden;
+}
+
+.main__nav::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgb(28, 28, 28);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.2s ease;
+  z-index: -1;
+}
+
+.main__nav_active::before {
+  transform: scaleX(1);
 }
 
 .nav__logo {
@@ -25,6 +43,21 @@
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
+  cursor: pointer;
+}
+
+.menuWrapper {
+  transform: translateX(-200px);
+  pointer-events: none;
+
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.menuWrapperOpen {
+  transform: translateX(0);
+  pointer-events: auto;
 }
 
 .nav__menu {
