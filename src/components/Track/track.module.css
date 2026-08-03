@@ -108,12 +108,14 @@
 .track__timeSvg {
   width: 14px;
   height: 12px;
-  margin-right: 17px;
+  margin-right: 8px;
   fill: transparent;
   stroke: #696969;
 }
 
 .track__timeText {
+  display: inline-block;
+  min-width: 38px;
   font-style: normal;
   font-weight: 400;
   font-size: 16px;

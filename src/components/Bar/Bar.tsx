@@ -1,6 +1,6 @@
-import cn from 'classnames';
-import Link from 'next/link';
-import style from './bar.module.css';
+import cn from 'classnames'
+import Link from 'next/link'
+import style from './bar.module.css'
 
 export default function Bar() {
   return (
@@ -89,5 +89,5 @@ export default function Bar() {
         </div>
       </div>
     </div>
-  );
+  )
 }

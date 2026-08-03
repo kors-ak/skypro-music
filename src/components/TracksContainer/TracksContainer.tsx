@@ -1,7 +1,7 @@
-import { tracks } from '@/data';
-import cn from 'classnames';
-import Track from '../Track/Track';
-import style from './trackscontainer.module.css';
+import { data } from '@/data'
+import cn from 'classnames'
+import Track from '../Track/Track'
+import style from './trackscontainer.module.css'
 
 export default function TracksContainer() {
   return (
@@ -19,10 +19,10 @@ export default function TracksContainer() {
         </div>
       </div>
       <div className={style.content__playlist}>
-        {tracks.map((track) => (
-          <Track key={track.id} track={track} />
+        {data.map((track) => (
+          <Track key={track._id} track={track} />
         ))}
       </div>
     </div>
-  );
+  )
 }

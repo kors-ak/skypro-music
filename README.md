@@ -91,9 +91,6 @@ npm run dev
 http://localhost:3000
 ```
 
-
-
-
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

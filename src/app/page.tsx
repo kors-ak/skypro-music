@@ -1,8 +1,8 @@
-import Bar from '@/components/Bar/Bar';
-import CenterBlock from '@/components/CenterBlock/CenterBlock';
-import Nav from '@/components/Nav/Nav';
-import Sidebar from '@/components/Sidebar/Sidebar';
-import style from './page.module.css';
+import Bar from '@/components/Bar/Bar'
+import CenterBlock from '@/components/CenterBlock/CenterBlock'
+import Nav from '@/components/Nav/Nav'
+import Sidebar from '@/components/Sidebar/Sidebar'
+import style from './page.module.css'
 
 export default function Home() {
   return (
@@ -17,5 +17,5 @@ export default function Home() {
         <Bar />
       </div>
     </div>
-  );
+  )
 }
