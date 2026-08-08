@@ -1,6 +1,10 @@
 'use client'
 
-import { setIsPlaying } from '@/store/features/trackSlice'
+import {
+  setIsMuted,
+  setIsPlaying,
+  setVolume,
+} from '@/store/features/trackSlice'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import cn from 'classnames'
 import Link from 'next/link'
@@ -11,11 +15,15 @@ export default function Bar() {
   const dispatch = useAppDispatch()
   const currentTrack = useAppSelector((state) => state.tracks.currentTrack)
   const isPlaying = useAppSelector((state) => state.tracks.isPlaying)
+  const isMuted = useAppSelector((state) => state.tracks.isMuted)
+  const volume = useAppSelector((state) => state.tracks.volume)
 
   const audioRef = useRef<HTMLAudioElement | null>(null)
 
   useEffect(() => {
     if (!audioRef.current || !currentTrack) return
+
+    audioRef.current.volume = volume
 
     if (isPlaying) {
       audioRef.current.play().catch((error) => {
@@ -25,7 +33,13 @@ export default function Bar() {
     } else {
       audioRef.current.pause()
     }
-  }, [currentTrack, isPlaying, dispatch])
+
+    if (isMuted) {
+      audioRef.current.muted = true
+    } else {
+      audioRef.current.muted = false
+    }
+  }, [currentTrack, isPlaying, isMuted, volume, dispatch])
 
   if (!currentTrack) return <></>
 
@@ -135,16 +149,36 @@ export default function Bar() {
           </div>
           <div className={style.bar__volumeBlock}>
             <div className={style.volume__content}>
-              <div className={style.volume__image}>
+              <div
+                className={style.volume__image}
+                onClick={() => dispatch(setIsMuted(!isMuted))}
+              >
                 <svg className={style.volume__svg}>
-                  <use xlinkHref="/img/icon/sprite.svg#icon-volume"></use>
+                  <use
+                    xlinkHref={
+                      isMuted ? '/img/icon/muted.svg' : '/img/icon/volume.svg'
+                    }
+                  ></use>
                 </svg>
               </div>
               <div className={cn(style.volume__progress, style.btn)}>
                 <input
                   className={cn(style.volume__progressLine, style.btn)}
                   type="range"
-                  name="range"
+                  min="0"
+                  max="100"
+                  value={isMuted ? 0 : volume * 100}
+                  onChange={(e) => {
+                    const newVolume = Number(e.target.value) / 100
+
+                    dispatch(setVolume(newVolume))
+
+                    if (newVolume === 0) {
+                      dispatch(setIsMuted(true))
+                    } else {
+                      dispatch(setIsMuted(false))
+                    }
+                  }}
                 />
               </div>
             </div>
