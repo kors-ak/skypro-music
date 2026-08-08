@@ -4,6 +4,7 @@ import { TrackType } from '@/sharedTypes/sharedTypes'
 import { setCurrentTrack, setIsPlaying } from '@/store/features/trackSlice'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { formatDuration } from '@/utils/formatDuration'
+import cn from 'classnames'
 import Link from 'next/link'
 import style from './track.module.css'
 
@@ -40,9 +41,18 @@ export default function Track({ track }: TrackProps) {
                 alt={track.name}
               />
             ) : (
-              <svg className={style.track__titleSvg}>
-                <use xlinkHref="/img/icon/sprite.svg#icon-note"></use>
-              </svg>
+              !isCurrentTrack && (
+                <svg className={style.track__titleSvg}>
+                  <use xlinkHref="/img/icon/sprite.svg#icon-note"></use>
+                </svg>
+              )
+            )}
+            {isCurrentTrack && (
+              <div
+                className={cn(style.track__dot, {
+                  [style.pulse]: isTrackPlaying,
+                })}
+              ></div>
             )}
           </div>
           <div>
