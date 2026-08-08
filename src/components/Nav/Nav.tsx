@@ -29,9 +29,7 @@ export default function Nav() {
         <span className={style.burger__line}></span>
         <span className={style.burger__line}></span>
       </div>
-      <div
-        className={`${style.menuWrapper} ${isOpen ? style.menuWrapperOpen : ''}`}
-      >
+      <div className={cn(style.menuWrapper, isOpen && style.menuWrapperOpen)}>
         <div className={style.nav__menu}>
           <ul className={style.menu__list}>
             <li className={style.menu__item}>

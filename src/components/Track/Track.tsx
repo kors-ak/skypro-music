@@ -1,4 +1,8 @@
+'use client'
+
 import { TrackType } from '@/sharedTypes/sharedTypes'
+import { setCurrentTrack } from '@/store/features/trackSlice'
+import { useAppDispatch } from '@/store/hooks'
 import { formatDuration } from '@/utils/formatDuration'
 import Link from 'next/link'
 import style from './track.module.css'
@@ -8,8 +12,13 @@ type TrackProps = {
 }
 
 export default function Track({ track }: TrackProps) {
+  const dispatch = useAppDispatch()
+  const handleClickTrack = () => {
+    dispatch(setCurrentTrack(track))
+  }
+
   return (
-    <div className={style.playlist__item}>
+    <div className={style.playlist__item} onClick={handleClickTrack}>
       <div className={style.playlist__track}>
         <div className={style.track__title}>
           <div className={style.track__titleImage}>
