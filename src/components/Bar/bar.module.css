@@ -4,6 +4,12 @@
   left: 0;
   width: 100%;
   background: rgba(28, 28, 28, 0.5);
+  backdrop-filter: blur(4px);
+  box-shadow: 0px -4px 16px 8px rgba(24, 24, 24, 1);
+}
+
+.bar__audio {
+  display: none;
 }
 
 .bar__content {
@@ -86,6 +92,18 @@
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  cursor: pointer;
+}
+
+.player__btnPrev,
+.player__btnPlay,
+.player__btnNext,
+.player__btnPause {
+  color: rgba(217, 217, 217, 1);
+
+  &:hover {
+    color: rgba(105, 105, 105, 1);
+  }
 }
 
 .player__btnPrev {
@@ -104,7 +122,6 @@
 .player__btnPlaySvg {
   width: 22px;
   height: 20px;
-  fill: #d9d9d9;
 }
 
 .player__btnNext {
@@ -115,8 +132,6 @@
 .player__btnNextSvg {
   width: 15px;
   height: 14px;
-  fill: inherit;
-  stroke: #d9d9d9;
 }
 
 .player__btnRepeat {
@@ -162,7 +177,7 @@
   display: grid;
   -ms-grid-columns: auto 1fr;
   grid-template-columns: auto 1fr;
-  grid-template-areas: 'image author' 'image album';
+  grid-template-areas: 'image name' 'image author';
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
@@ -188,6 +203,13 @@
   grid-area: image;
 }
 
+.trackPlay__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
 .trackPlay__svg {
   width: 18px;
   height: 17px;
@@ -195,14 +217,14 @@
   stroke: #4e4e4e;
 }
 
-.trackPlay__author {
+.trackPlay__name {
   grid-row: 1;
   grid-column: 2;
-  grid-area: author;
+  grid-area: name;
   min-width: 49px;
 }
 
-.trackPlay__authorLink {
+.trackPlay__nameLink {
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -211,14 +233,14 @@
   white-space: nowrap;
 }
 
-.trackPlay__album {
+.trackPlay__author {
   grid-row: 2;
   grid-column: 2;
-  grid-area: album;
+  grid-area: author;
   min-width: 49px;
 }
 
-.trackPlay__albumLink {
+.trackPlay__authorLink {
   font-style: normal;
   font-weight: 400;
   font-size: 13px;
@@ -269,6 +291,7 @@
   width: 13px;
   height: 18px;
   margin-right: 17px;
+  cursor: pointer;
 }
 
 .volume__svg {

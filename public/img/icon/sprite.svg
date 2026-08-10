@@ -16,30 +16,30 @@
         <ellipse cx="15.5" cy="13" rx="3.5" ry="2" stroke="#4E4E4E"/>
     </symbol>
     <symbol id="icon-volume" fill="none" viewBox="0 0 14 18" xmlns="http://www.w3.org/2000/svg">
-        <mask id="path-1-inside-1_2985_507" fill="white">
+        <mask id="path-1-inside-1_2985_507" fill="currentColor">
         <path fill-rule="evenodd" clip-rule="evenodd" d="M8 0L3 5H0V13H3L8 18V0Z"/>
         </mask>
-        <path d="M3 5V6H3.41421L3.70711 5.70711L3 5ZM8 0H9V-2.41421L7.29289 -0.707107L8 0ZM0 5V4H-1V5H0ZM0 13H-1V14H0V13ZM3 13L3.70711 12.2929L3.41421 12H3V13ZM8 18L7.29289 18.7071L9 20.4142V18H8ZM3.70711 5.70711L8.70711 0.707107L7.29289 -0.707107L2.29289 4.29289L3.70711 5.70711ZM0 6H3V4H0V6ZM1 13V5H-1V13H1ZM3 12H0V14H3V12ZM8.70711 17.2929L3.70711 12.2929L2.29289 13.7071L7.29289 18.7071L8.70711 17.2929ZM7 0V18H9V0H7Z" fill="white" mask="url(#path-1-inside-1_2985_507)"/>
-        <path d="M11 13C12.1046 13 13 11.2091 13 9C13 6.79086 12.1046 5 11 5" stroke="white"/>
+        <path d="M3 5V6H3.41421L3.70711 5.70711L3 5ZM8 0H9V-2.41421L7.29289 -0.707107L8 0ZM0 5V4H-1V5H0ZM0 13H-1V14H0V13ZM3 13L3.70711 12.2929L3.41421 12H3V13ZM8 18L7.29289 18.7071L9 20.4142V18H8ZM3.70711 5.70711L8.70711 0.707107L7.29289 -0.707107L2.29289 4.29289L3.70711 5.70711ZM0 6H3V4H0V6ZM1 13V5H-1V13H1ZM3 12H0V14H3V12ZM8.70711 17.2929L3.70711 12.2929L2.29289 13.7071L7.29289 18.7071L8.70711 17.2929ZM7 0V18H9V0H7Z" fill="currentColor" mask="url(#path-1-inside-1_2985_507)"/>
+        <path d="M11 13C12.1046 13 13 11.2091 13 9C13 6.79086 12.1046 5 11 5" stroke="currentColor"/>
     </symbol>
     <symbol id="icon-dislike"  viewBox="0 0 16 15"  xmlns="http://www.w3.org/2000/svg">
         <path d="M8.34372 3.25572H8.36529C9.29718 2.44175 11.7563 1.16576 13.9565 2.76734C17.3111 5.20921 14.2458 10.5 8.36529 14H8.34372M8.34378 3.25572H8.32221C7.39032 2.44175 4.93121 1.16576 2.73102 2.76734C-0.623552 5.20921 2.44172 10.5 8.32221 14H8.34378" />
         <path d="M1 1L15 13.5" />
     </symbol>
     <symbol id="icon-prev" viewBox="0 0 16 14"  xmlns="http://www.w3.org/2000/svg">
-        <path d="M1 2V12.5" stroke="white"/>
-        <path d="M3 7L12.75 0.937823L12.75 13.0622L3 7Z" fill="#D9D9D9"/>
+        <path d="M1 2V12.5" stroke="currentColor"/>
+        <path d="M3 7L12.75 0.937823L12.75 13.0622L3 7Z" fill="currentColor"/>
     </symbol>
     <symbol id="icon-play" viewBox="0 0 15 20"  xmlns="http://www.w3.org/2000/svg">
-        <path d="M15 10L-1.01012e-06 0.47372L-1.84293e-06 19.5263L15 10Z" fill="#D9D9D9"/>
+        <path d="M15 10L-1.01012e-06 0.47372L-1.84293e-06 19.5263L15 10Z" fill="currentColor"/>
     </symbol>
     <symbol id="icon-pause" viewBox="0 0 15 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0 0h5v19H0z" fill="#D9D9D9"/>
-        <path d="M10 0h5v19h-5z" fill="#D9D9D9"/>
+        <path d="M0 0h5v19H0z" fill="currentColor"/>
+        <path d="M10 0h5v19h-5z" fill="currentColor"/>
     </symbol>
     <symbol id="icon-next" viewBox="0 0 16 14"  xmlns="http://www.w3.org/2000/svg">
-        <path d="M15 2V12.5" stroke="white"/>
-        <path d="M13 7L3.25 0.937823L3.25 13.0622L13 7Z" fill="#D9D9D9"/>
+        <path d="M15 2V12.5" stroke="currentColor"/>
+        <path d="M13 7L3.25 0.937823L3.25 13.0622L13 7Z" fill="currentColor"/>
     </symbol>
     <symbol id="icon-repeat" viewBox="0 0 20 18"  xmlns="http://www.w3.org/2000/svg">
         <path d="M10 3L5 0.113249V5.88675L10 3ZM7 14.5C3.96243 14.5 1.5 12.0376 1.5 9H0.5C0.5 12.5899 3.41015 15.5 7 15.5V14.5ZM1.5 9C1.5 5.96243 3.96243 3.5 7 3.5V2.5C3.41015 2.5 0.5 5.41015 0.5 9H1.5Z" fill="#696969"/>
