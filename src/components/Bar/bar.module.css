@@ -136,13 +136,13 @@
 
 .player__btnRepeat {
   margin-right: 24px;
+  color: #696969;
+  stroke: #696969;
 }
 
 .player__btnRepeatSvg {
   width: 18px;
   height: 12px;
-  fill: transparent;
-  stroke: #696969;
 }
 
 .player__btnShuffle {
@@ -292,12 +292,17 @@
   height: 18px;
   margin-right: 17px;
   cursor: pointer;
+  color: rgba(217, 217, 217, 1);
+
+  &:hover {
+    color: rgba(172, 172, 172, 1);
+  }
 }
 
 .volume__svg {
   width: 13px;
   height: 18px;
-  fill: transparent;
+  display: block;
 }
 
 .volume__progress {
@@ -354,4 +359,9 @@
   fill: #696969;
   stroke: #ffffff;
   cursor: pointer;
+}
+
+.player__btnActive {
+  color: rgba(255, 255, 255, 1);
+  stroke: rgba(255, 255, 255, 1);
 }

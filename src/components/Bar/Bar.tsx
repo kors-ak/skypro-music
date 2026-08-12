@@ -8,7 +8,7 @@ import {
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import cn from 'classnames'
 import Link from 'next/link'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import style from './bar.module.css'
 
 export default function Bar() {
@@ -17,6 +17,8 @@ export default function Bar() {
   const isPlaying = useAppSelector((state) => state.tracks.isPlaying)
   const isMuted = useAppSelector((state) => state.tracks.isMuted)
   const volume = useAppSelector((state) => state.tracks.volume)
+
+  const [isLooping, setIsLooping] = useState(false)
 
   const audioRef = useRef<HTMLAudioElement | null>(null)
 
@@ -64,6 +66,7 @@ export default function Bar() {
         ref={audioRef}
         src={currentTrack?.track_file}
         controls
+        loop={isLooping}
       />
       <div className={style.bar__content}>
         <div className={style.bar__playerProgress}></div>
@@ -94,7 +97,12 @@ export default function Bar() {
                   <use xlinkHref="/img/icon/sprite.svg#icon-next"></use>
                 </svg>
               </div>
-              <div className={cn(style.player__btnRepeat, style.btnIcon)}>
+              <div
+                className={cn(style.player__btnRepeat, style.btnIcon, {
+                  [style.player__btnActive]: isLooping,
+                })}
+                onClick={() => setIsLooping((prev) => !prev)}
+              >
                 <svg className={style.player__btnRepeatSvg}>
                   <use xlinkHref="/img/icon/sprite.svg#icon-repeat"></use>
                 </svg>
@@ -153,10 +161,12 @@ export default function Bar() {
                 className={style.volume__image}
                 onClick={() => dispatch(setIsMuted(!isMuted))}
               >
-                <svg className={style.volume__svg}>
+                <svg className={style.volume__svg} aria-hidden="true">
                   <use
                     xlinkHref={
-                      isMuted ? '/img/icon/muted.svg' : '/img/icon/volume.svg'
+                      isMuted
+                        ? '/img/icon/sprite.svg#icon-muted'
+                        : '/img/icon/sprite.svg#icon-volume'
                     }
                   ></use>
                 </svg>
