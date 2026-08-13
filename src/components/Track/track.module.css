@@ -13,6 +13,7 @@
   width: 100%;
   display: block;
   margin-bottom: 12px;
+  cursor: pointer;
 }
 
 .playlist__track {

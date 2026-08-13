@@ -138,6 +138,11 @@
   margin-right: 24px;
   color: #696969;
   stroke: #696969;
+
+  &:hover {
+    color: rgba(172, 172, 172, 1);
+    stroke: rgba(172, 172, 172, 1);
+  }
 }
 
 .player__btnRepeatSvg {
