@@ -4,7 +4,7 @@ import { setIsPlaying } from '@/store/features/trackSlice'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import cn from 'classnames'
 import Link from 'next/link'
-import { useEffect, useRef, useState } from 'react'
+import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import style from './bar.module.css'
 
 export default function Bar() {
@@ -43,10 +43,21 @@ export default function Bar() {
 
   const togglePlay = () => dispatch(setIsPlaying(!isPlaying))
 
-  const handleTimeUpdate = () => {}
-
   const handleLoadedMetadata = () => {
     setIsLoaded(true)
+  }
+
+  const handleTimeUpdate = () => {}
+
+  const handleVolumeUpdate = (e: ChangeEvent<HTMLInputElement>) => {
+    const newVolume = Number(e.target.value) / 100
+    setVolume(newVolume)
+
+    if (newVolume === 0) {
+      setIsMuted(true)
+    } else {
+      setIsMuted(false)
+    }
   }
 
   return (
@@ -174,17 +185,7 @@ export default function Bar() {
                   min="0"
                   max="100"
                   value={isMuted ? 0 : volume * 100}
-                  onChange={(e) => {
-                    const newVolume = Number(e.target.value) / 100
-
-                    setVolume(newVolume)
-
-                    if (newVolume === 0) {
-                      setIsMuted(true)
-                    } else {
-                      setIsMuted(false)
-                    }
-                  }}
+                  onChange={(e) => handleVolumeUpdate(e)}
                 />
               </div>
             </div>
