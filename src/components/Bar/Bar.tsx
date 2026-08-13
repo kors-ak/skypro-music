@@ -1,10 +1,6 @@
 'use client'
 
-import {
-  setIsMuted,
-  setIsPlaying,
-  setVolume,
-} from '@/store/features/trackSlice'
+import { setIsPlaying } from '@/store/features/trackSlice'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import cn from 'classnames'
 import Link from 'next/link'
@@ -15,9 +11,9 @@ export default function Bar() {
   const dispatch = useAppDispatch()
   const currentTrack = useAppSelector((state) => state.tracks.currentTrack)
   const isPlaying = useAppSelector((state) => state.tracks.isPlaying)
-  const isMuted = useAppSelector((state) => state.tracks.isMuted)
-  const volume = useAppSelector((state) => state.tracks.volume)
 
+  const [volume, setVolume] = useState(0.8)
+  const [isMuted, setIsMuted] = useState(false)
   const [isLooping, setIsLooping] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false)
 
@@ -64,6 +60,7 @@ export default function Bar() {
         onTimeUpdate={handleTimeUpdate}
         onLoadedMetadata={handleLoadedMetadata}
       />
+
       <div className={style.bar__content}>
         <div className={style.bar__playerProgress}></div>
 
@@ -158,7 +155,7 @@ export default function Bar() {
             <div className={style.volume__content}>
               <button
                 className={style.volume__image}
-                onClick={() => dispatch(setIsMuted(!isMuted))}
+                onClick={() => setIsMuted((prev) => !prev)}
               >
                 <svg className={style.volume__svg} aria-hidden="true">
                   <use
@@ -180,12 +177,12 @@ export default function Bar() {
                   onChange={(e) => {
                     const newVolume = Number(e.target.value) / 100
 
-                    dispatch(setVolume(newVolume))
+                    setVolume(newVolume)
 
                     if (newVolume === 0) {
-                      dispatch(setIsMuted(true))
+                      setIsMuted(true)
                     } else {
-                      dispatch(setIsMuted(false))
+                      setIsMuted(false)
                     }
                   }}
                 />
