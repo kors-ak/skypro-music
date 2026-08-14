@@ -101,6 +101,13 @@
   }
 }
 
+.player__btnPrev,
+.player__btnNext {
+  &:active {
+    color: rgba(217, 217, 217, 1);
+  }
+}
+
 .player__btnPrev {
   margin-right: 23px;
 }
@@ -151,13 +158,12 @@
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  color: rgba(105, 105, 105, 1);
 }
 
 .player__btnShuffleSvg {
   width: 19px;
   height: 12px;
-  fill: transparent;
-  stroke: #696969;
 }
 
 .player__trackPlay {

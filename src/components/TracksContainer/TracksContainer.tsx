@@ -20,7 +20,7 @@ export default function TracksContainer() {
       </div>
       <div className={style.content__playlist}>
         {data.map((track) => (
-          <Track key={track._id} track={track} />
+          <Track key={track._id} track={track} playlist={data} />
         ))}
       </div>
     </div>

@@ -1,6 +1,11 @@
 'use client'
 
-import { setIsPlaying } from '@/store/features/trackSlice'
+import {
+  setIsPlaying,
+  setNextTrack,
+  setPrevTrack,
+  toggleIsShuffled,
+} from '@/store/features/trackSlice'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import cn from 'classnames'
 import Link from 'next/link'
@@ -12,6 +17,7 @@ export default function Bar() {
   const dispatch = useAppDispatch()
   const currentTrack = useAppSelector((state) => state.tracks.currentTrack)
   const isPlaying = useAppSelector((state) => state.tracks.isPlaying)
+  const isShuffled = useAppSelector((state) => state.tracks.isShuffled)
 
   const [duration, setDuration] = useState(0)
   const [currentTime, setCurrentTime] = useState(0)
@@ -68,6 +74,16 @@ export default function Bar() {
   if (!currentTrack) return <></>
 
   const togglePlay = () => dispatch(setIsPlaying(!isPlaying))
+  const toggleShuffle = () => dispatch(toggleIsShuffled())
+
+  const handleNextTrack = () => dispatch(setNextTrack())
+  const handlePrevTrack = () => {
+    if (audioRef.current) {
+      audioRef.current.currentTime = 0
+      setCurrentTime(0)
+    }
+    dispatch(setPrevTrack())
+  }
 
   const handleLoadedMetadata = () => {
     setIsLoaded(true)
@@ -114,6 +130,7 @@ export default function Bar() {
         controls
         loop={isLooping}
         onLoadedMetadata={handleLoadedMetadata}
+        onEnded={handleNextTrack}
       />
 
       <div className={style.bar__content}>
@@ -129,7 +146,10 @@ export default function Bar() {
         <div className={style.bar__playerBlock}>
           <div className={style.bar__player}>
             <div className={style.player__controls}>
-              <button className={style.player__btnPrev}>
+              <button
+                onClick={handlePrevTrack}
+                className={style.player__btnPrev}
+              >
                 <svg className={style.player__btnPrevSvg}>
                   <use xlinkHref="/img/icon/sprite.svg#icon-prev"></use>
                 </svg>
@@ -149,7 +169,10 @@ export default function Bar() {
                   ></use>
                 </svg>
               </button>
-              <button className={style.player__btnNext}>
+              <button
+                onClick={handleNextTrack}
+                className={style.player__btnNext}
+              >
                 <svg className={style.player__btnNextSvg}>
                   <use xlinkHref="/img/icon/sprite.svg#icon-next"></use>
                 </svg>
@@ -165,7 +188,12 @@ export default function Bar() {
                   <use xlinkHref="/img/icon/sprite.svg#icon-repeat"></use>
                 </svg>
               </button>
-              <button className={cn(style.player__btnShuffle, style.btnIcon)}>
+              <button
+                onClick={toggleShuffle}
+                className={cn(style.player__btnShuffle, style.btnIcon, {
+                  [style.player__btnActive]: isShuffled,
+                })}
+              >
                 <svg className={style.player__btnShuffleSvg}>
                   <use xlinkHref="/img/icon/sprite.svg#icon-shuffle"></use>
                 </svg>
