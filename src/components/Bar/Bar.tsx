@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import cn from 'classnames'
 import Link from 'next/link'
 import { ChangeEvent, useEffect, useRef, useState } from 'react'
+import ProgressBar from '../ProgressBar/ProgressBar'
 import style from './bar.module.css'
 
 export default function Bar() {
@@ -12,10 +13,14 @@ export default function Bar() {
   const currentTrack = useAppSelector((state) => state.tracks.currentTrack)
   const isPlaying = useAppSelector((state) => state.tracks.isPlaying)
 
+  const [duration, setDuration] = useState(0)
+  const [currentTime, setCurrentTime] = useState(0)
   const [volume, setVolume] = useState(0.8)
   const [isMuted, setIsMuted] = useState(false)
   const [isLooping, setIsLooping] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false)
+  const [isSeeking, setIsSeeking] = useState(false)
+  const wasPlayingRef = useRef(false)
 
   const audioRef = useRef<HTMLAudioElement | null>(null)
 
@@ -29,7 +34,7 @@ export default function Bar() {
     audioRef.current.volume = volume
     audioRef.current.muted = isMuted
 
-    if (isPlaying) {
+    if (isPlaying && !isSeeking) {
       audioRef.current.play().catch((error) => {
         console.error('Не удалось запустить аудио:', error)
         dispatch(setIsPlaying(false))
@@ -37,7 +42,7 @@ export default function Bar() {
     } else {
       audioRef.current.pause()
     }
-  }, [currentTrack, isLoaded, isPlaying, isMuted, volume, dispatch])
+  }, [currentTrack, isLoaded, isPlaying, isSeeking, isMuted, volume, dispatch])
 
   if (!currentTrack) return <></>
 
@@ -45,9 +50,30 @@ export default function Bar() {
 
   const handleLoadedMetadata = () => {
     setIsLoaded(true)
+    setDuration(audioRef.current?.duration || 0)
   }
 
-  const handleTimeUpdate = () => {}
+  const handleTimeUpdate = () =>
+    setCurrentTime(audioRef.current?.currentTime || 0)
+
+  const handleProgressChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (audioRef.current) {
+      audioRef.current.currentTime = Number(e.target.value)
+    }
+  }
+
+  const handleSeekStart = () => {
+    wasPlayingRef.current = isPlaying
+    setIsSeeking(true)
+  }
+
+  const handleSeekEnd = () => {
+    setIsSeeking(false)
+
+    if (wasPlayingRef.current) {
+      dispatch(setIsPlaying(true))
+    }
+  }
 
   const handleVolumeUpdate = (e: ChangeEvent<HTMLInputElement>) => {
     const newVolume = Number(e.target.value) / 100
@@ -73,7 +99,14 @@ export default function Bar() {
       />
 
       <div className={style.bar__content}>
-        <div className={style.bar__playerProgress}></div>
+        <ProgressBar
+          max={duration}
+          value={currentTime}
+          onChange={(e) => handleProgressChange(e)}
+          readOnly={!isLoaded}
+          onMouseDown={handleSeekStart}
+          onMouseUp={handleSeekEnd}
+        />
 
         <div className={style.bar__playerBlock}>
           <div className={style.bar__player}>
