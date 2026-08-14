@@ -44,6 +44,27 @@ export default function Bar() {
     }
   }, [currentTrack, isLoaded, isPlaying, isSeeking, isMuted, volume, dispatch])
 
+  useEffect(() => {
+    if (!isPlaying || isSeeking) return
+
+    // отвечает за плавность заполнения полосы прогресса трека
+    let animationFrameId: number
+
+    const updateProgress = () => {
+      if (audioRef.current) {
+        setCurrentTime(audioRef.current.currentTime)
+      }
+
+      animationFrameId = requestAnimationFrame(updateProgress)
+    }
+
+    animationFrameId = requestAnimationFrame(updateProgress)
+
+    return () => {
+      cancelAnimationFrame(animationFrameId)
+    }
+  }, [isPlaying, isSeeking])
+
   if (!currentTrack) return <></>
 
   const togglePlay = () => dispatch(setIsPlaying(!isPlaying))
@@ -53,12 +74,10 @@ export default function Bar() {
     setDuration(audioRef.current?.duration || 0)
   }
 
-  const handleTimeUpdate = () =>
-    setCurrentTime(audioRef.current?.currentTime || 0)
-
   const handleProgressChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (audioRef.current) {
       audioRef.current.currentTime = Number(e.target.value)
+      setCurrentTime(Number(e.target.value))
     }
   }
 
@@ -94,7 +113,6 @@ export default function Bar() {
         src={currentTrack?.track_file}
         controls
         loop={isLooping}
-        onTimeUpdate={handleTimeUpdate}
         onLoadedMetadata={handleLoadedMetadata}
       />
 
