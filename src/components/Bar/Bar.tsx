@@ -42,8 +42,10 @@ export default function Bar() {
 
     if (isPlaying && !isSeeking) {
       audioRef.current.play().catch((error) => {
-        console.error('Не удалось запустить аудио:', error)
-        dispatch(setIsPlaying(false))
+        if (error.name !== 'AbortError') {
+          console.error('Не удалось запустить аудио:', error)
+          dispatch(setIsPlaying(false))
+        }
       })
     } else {
       audioRef.current.pause()
