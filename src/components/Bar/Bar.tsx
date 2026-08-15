@@ -31,7 +31,7 @@ export default function Bar() {
 
   const audioRef = useRef<HTMLAudioElement | null>(null)
 
-  const progressText = `${formatDuration(currentTime)} / ${formatDuration(duration)}`
+  const progressText = `${formatDuration(currentTime)} / ${formatDuration(isLoaded ? duration : 0)}`
 
   useEffect(() => {
     setIsLoaded(false)
