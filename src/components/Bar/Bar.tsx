@@ -7,6 +7,7 @@ import {
   toggleIsShuffled,
 } from '@/store/features/trackSlice'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
+import { formatDuration } from '@/utils/formatDuration'
 import cn from 'classnames'
 import Link from 'next/link'
 import { ChangeEvent, useEffect, useRef, useState } from 'react'
@@ -29,6 +30,8 @@ export default function Bar() {
   const wasPlayingRef = useRef(false)
 
   const audioRef = useRef<HTMLAudioElement | null>(null)
+
+  const progressText = `${formatDuration(currentTime)} / ${formatDuration(duration)}`
 
   useEffect(() => {
     setIsLoaded(false)
@@ -144,6 +147,16 @@ export default function Bar() {
           onMouseDown={handleSeekStart}
           onMouseUp={handleSeekEnd}
         />
+
+        {!isLoaded && (
+          <div className={style.bar__loading}>
+            <p>Загрузка трека...</p>
+          </div>
+        )}
+
+        <div className={style.bar__progress}>
+          <p>{progressText}</p>
+        </div>
 
         <div className={style.bar__playerBlock}>
           <div className={style.bar__player}>
