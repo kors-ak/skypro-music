@@ -15,7 +15,7 @@ export default function Nav() {
 
   return (
     <nav className={cn(style.main__nav, isOpen && style.main__nav_active)}>
-      <div className={style.nav__logo}>
+      <Link href={'/'} className={style.nav__logo}>
         <Image
           width={250}
           height={170}
@@ -23,7 +23,7 @@ export default function Nav() {
           src="/img/logo.png"
           alt={'logo'}
         />
-      </div>
+      </Link>
       <div className={style.nav__burger} onClick={handleMenuToggle}>
         <span className={style.burger__line}></span>
         <span className={style.burger__line}></span>
