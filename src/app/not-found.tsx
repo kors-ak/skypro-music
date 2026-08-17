@@ -24,7 +24,7 @@ export default function NotFound() {
             или перенесена на другой адрес
           </div>
 
-          <Link href="/" className={style.button}>
+          <Link href="/music/main" className={style.button}>
             Вернуться на главную
           </Link>
         </div>

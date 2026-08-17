@@ -12,7 +12,7 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
       <div className={style.containerEnter}>
         <div className={style.modal__block}>
           <form className={style.modal__form}>
-            <Link href="/">
+            <Link href="/music/main">
               <div className={style.modal__logo}>
                 <img src="/img/logo_modal.png" alt="logo" />
               </div>

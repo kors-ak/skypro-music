@@ -15,7 +15,7 @@ export default function Nav() {
 
   return (
     <nav className={cn(style.main__nav, isOpen && style.main__nav_active)}>
-      <Link href={'/'} className={style.nav__logo}>
+      <Link href={'/music/main'} className={style.nav__logo}>
         <Image
           width={250}
           height={170}
@@ -33,7 +33,7 @@ export default function Nav() {
         <div className={style.nav__menu}>
           <ul className={style.menu__list}>
             <li className={style.menu__item}>
-              <Link href="#" className={style.menu__link}>
+              <Link href="/music/main" className={style.menu__link}>
                 Главное
               </Link>
             </li>
@@ -43,7 +43,7 @@ export default function Nav() {
               </Link>
             </li>
             <li className={style.menu__item}>
-              <Link href="../signin.html" className={style.menu__link}>
+              <Link href="/auth/sign-in" className={style.menu__link}>
                 Войти
               </Link>
             </li>

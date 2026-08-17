@@ -1,16 +1,26 @@
 import Bar from '@/components/Bar/Bar'
-import CenterBlock from '@/components/CenterBlock/CenterBlock'
 import Nav from '@/components/Nav/Nav'
+import Search from '@/components/Search/Search'
 import Sidebar from '@/components/Sidebar/Sidebar'
-import style from './page.module.css'
+import { ReactNode } from 'react'
+import style from './layout.module.css'
 
-export default function Home() {
+type MusicLayoutProps = {
+  children: ReactNode
+}
+
+export default function MusicLayout({ children }: MusicLayoutProps) {
   return (
     <div className={style.wrapper}>
       <div className={style.container}>
         <main className={style.main}>
           <Nav />
-          <CenterBlock />
+
+          <div className={style.centerblock}>
+            <Search />
+            {children}
+          </div>
+
           <Sidebar />
         </main>
 
