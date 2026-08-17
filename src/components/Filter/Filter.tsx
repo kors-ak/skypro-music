@@ -1,20 +1,20 @@
 'use client'
 
-import { data } from '@/data'
 import { TrackType } from '@/sharedTypes/sharedTypes'
 import { getUniqueTrackValues } from '@/utils/getUniqueTrackValues'
 import { useState } from 'react'
 import FilterItem from '../FilterItem/FilterItem'
 import style from './filter.module.css'
 
-export default function Filter() {
+export default function Filter({ tracks }: { tracks: TrackType[] }) {
   const [activeFilter, setActiveFilter] = useState<string | null>()
 
   const toggleFilter = (name: 'author' | 'year' | 'genre') => {
     setActiveFilter((prev) => (prev === name ? null : name))
   }
 
-  const getValues = (name: keyof TrackType) => getUniqueTrackValues(data, name)
+  const getValues = (name: keyof TrackType) =>
+    getUniqueTrackValues(tracks, name)
 
   return (
     <div className={style.centerblock__filter}>

@@ -6,7 +6,10 @@ export type TrackType = {
   genre: string[]
   duration_in_seconds: number
   album: string
-  logo: string | null
+  logo: {
+    type: string
+    data: number[]
+  }
   track_file: string
-  stared_user: string[]
+  staredUser: number[]
 }

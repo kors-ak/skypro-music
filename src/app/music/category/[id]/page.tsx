@@ -2,41 +2,51 @@
 
 import Filter from '@/components/Filter/Filter'
 import TracksContainer from '@/components/TracksContainer/TracksContainer'
-import { notFound, useParams } from 'next/navigation'
+import { handleTasksError } from '@/services/errorHandling'
+import { getCategoryTraks, getTracks } from '@/services/tracksApi'
+import { TrackType } from '@/sharedTypes/sharedTypes'
+import { useParams } from 'next/navigation'
+import { useEffect, useState } from 'react'
 import style from './page.module.css'
-
-const getTitle = (id: string) => {
-  switch (id) {
-    case '1':
-      return 'Плейлист дня'
-
-    case '2':
-      return '100 танцевальных хитов'
-
-    case '3':
-      return 'Инди заряд'
-
-    case 'favorite':
-      return 'Мои треки'
-
-    default:
-      return
-  }
-}
 
 export default function CategoryPage() {
   const params = useParams<{ id: string }>()
-  const title = getTitle(params.id)
 
-  if (!title) notFound()
+  const [tracks, setTracks] = useState<TrackType[]>([])
+  const [trackIds, setTrackIds] = useState<number[]>([])
+  const [title, setTitle] = useState('')
+  const [error, setError] = useState('')
+
+  useEffect(() => {
+    getTracks()
+      .then((data) => setTracks(data))
+      .catch((error) => {
+        handleTasksError(error, setError)
+      })
+
+    getCategoryTraks(Number(params.id))
+      .then((data) => {
+        setTrackIds(data.items)
+        setTitle(data.name)
+      })
+      .catch((error) => {
+        handleTasksError(error, setError)
+      })
+  }, [])
 
   return (
     <>
       <h2 className={style.heading}>{title}</h2>
 
-      <Filter />
+      {error}
 
-      <TracksContainer />
+      <Filter
+        tracks={tracks.filter((track) => trackIds.includes(Number(track._id)))}
+      />
+
+      <TracksContainer
+        tracks={tracks.filter((track) => trackIds.includes(Number(track._id)))}
+      />
     </>
   )
 }

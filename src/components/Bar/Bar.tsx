@@ -205,17 +205,9 @@ export default function Bar() {
             <div className={style.player__trackPlay}>
               <div className={style.trackPlay__contain}>
                 <div className={style.trackPlay__image}>
-                  {currentTrack.logo ? (
-                    <img
-                      className={style.trackPlay__img}
-                      src={currentTrack.logo}
-                      alt={currentTrack.name}
-                    />
-                  ) : (
-                    <svg className={style.trackPlay__svg}>
-                      <use xlinkHref="/img/icon/sprite.svg#icon-note"></use>
-                    </svg>
-                  )}
+                  <svg className={style.trackPlay__svg}>
+                    <use xlinkHref="/img/icon/sprite.svg#icon-note"></use>
+                  </svg>
                 </div>
                 <div className={style.trackPlay__name}>
                   <Link className={style.trackPlay__nameLink} href="">

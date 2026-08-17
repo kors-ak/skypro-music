@@ -1,9 +1,13 @@
-import { data } from '@/data'
+import { TrackType } from '@/sharedTypes/sharedTypes'
 import cn from 'classnames'
 import Track from '../Track/Track'
 import style from './trackscontainer.module.css'
 
-export default function TracksContainer() {
+type TracksContainerProps = {
+  tracks: TrackType[]
+}
+
+export default function TracksContainer({ tracks }: TracksContainerProps) {
   return (
     <div className={style.centerblock__content}>
       <div className={style.content__title}>
@@ -19,8 +23,8 @@ export default function TracksContainer() {
         </div>
       </div>
       <div className={style.content__playlist}>
-        {data.map((track) => (
-          <Track key={track._id} track={track} playlist={data} />
+        {tracks.map((track) => (
+          <Track key={track._id} track={track} playlist={tracks} />
         ))}
       </div>
     </div>
