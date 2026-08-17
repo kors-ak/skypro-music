@@ -21,24 +21,6 @@
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
-
-  position: relative;
-}
-
-.bar__progress {
-  position: absolute;
-  right: 12px;
-  bottom: 80px;
-
-  color: rgba(217, 217, 217, 1);
-}
-
-.bar__loading {
-  position: absolute;
-  left: 12px;
-  bottom: 80px;
-
-  color: rgba(217, 217, 217, 1);
 }
 
 .bar__playerBlock {

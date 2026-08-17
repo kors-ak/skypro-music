@@ -54,8 +54,6 @@ const trackSlice = createSlice({
           (el) => el._id === state.currentTrack?._id
         )
 
-        if (currentTrackIndex === currentPlaylist.length - 1) return // для соответствия чек-листу. Уточнить, можно ли начинать плейлист сначала
-
         const nextTrackIndex =
           currentTrackIndex === currentPlaylist.length - 1
             ? 0
