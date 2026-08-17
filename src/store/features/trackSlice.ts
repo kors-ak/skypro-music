@@ -4,15 +4,17 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 type initialStateType = {
   currentTrack: null | TrackType
   isPlaying: boolean
-  isMuted: boolean
-  volume: number
+  isShuffled: boolean
+  playlist: TrackType[]
+  shuffledPlaylist: TrackType[]
 }
 
 const initialState: initialStateType = {
   currentTrack: null,
   isPlaying: false,
-  isMuted: false,
-  volume: 0.8,
+  isShuffled: false,
+  playlist: [],
+  shuffledPlaylist: [],
 }
 
 const trackSlice = createSlice({
@@ -25,15 +27,68 @@ const trackSlice = createSlice({
     setIsPlaying: (state, action: PayloadAction<boolean>) => {
       state.isPlaying = action.payload
     },
-    setIsMuted: (state, action: PayloadAction<boolean>) => {
-      state.isMuted = action.payload
+    toggleIsShuffled: (state) => {
+      state.isShuffled = !state.isShuffled
+
+      if (!state.isShuffled || !state.currentTrack) return
+
+      const otherTracks = state.playlist.filter(
+        (track) => track._id !== state.currentTrack?._id
+      )
+
+      state.shuffledPlaylist = [
+        state.currentTrack,
+        ...otherTracks.sort(() => Math.random() - 0.5),
+      ]
     },
-    setVolume: (state, action: PayloadAction<number>) => {
-      state.volume = action.payload
+    setPlaylist: (state, action: PayloadAction<TrackType[]>) => {
+      state.playlist = action.payload
+    },
+    setNextTrack: (state) => {
+      const currentPlaylist = state.isShuffled
+        ? state.shuffledPlaylist
+        : state.playlist
+
+      if (state.currentTrack) {
+        const currentTrackIndex = currentPlaylist.findIndex(
+          (el) => el._id === state.currentTrack?._id
+        )
+
+        if (currentTrackIndex === currentPlaylist.length - 1) return // для соответствия чек-листу. Уточнить, можно ли начинать плейлист сначала
+
+        const nextTrackIndex =
+          currentTrackIndex === currentPlaylist.length - 1
+            ? 0
+            : currentTrackIndex + 1
+
+        state.currentTrack = currentPlaylist[nextTrackIndex]
+      }
+    },
+    setPrevTrack: (state) => {
+      const currentPlaylist = state.isShuffled
+        ? state.shuffledPlaylist
+        : state.playlist
+
+      if (state.currentTrack) {
+        const currentTrackIndex = currentPlaylist.findIndex(
+          (el) => el._id === state.currentTrack?._id
+        )
+
+        const prevTrackIndex =
+          currentTrackIndex === 0 ? 0 : currentTrackIndex - 1
+
+        state.currentTrack = currentPlaylist[prevTrackIndex]
+      }
     },
   },
 })
 
-export const { setCurrentTrack, setIsPlaying, setIsMuted, setVolume } =
-  trackSlice.actions
+export const {
+  setCurrentTrack,
+  setIsPlaying,
+  setPlaylist,
+  setNextTrack,
+  setPrevTrack,
+  toggleIsShuffled,
+} = trackSlice.actions
 export const trackSliceReducer = trackSlice.reducer

@@ -1,59 +1,128 @@
 'use client'
 
 import {
-  setIsMuted,
   setIsPlaying,
-  setVolume,
+  setNextTrack,
+  setPrevTrack,
+  toggleIsShuffled,
 } from '@/store/features/trackSlice'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
+import { formatDuration } from '@/utils/formatDuration'
 import cn from 'classnames'
 import Link from 'next/link'
-import { useEffect, useRef } from 'react'
+import { ChangeEvent, useEffect, useRef, useState } from 'react'
+import ProgressBar from '../ProgressBar/ProgressBar'
 import style from './bar.module.css'
 
 export default function Bar() {
   const dispatch = useAppDispatch()
   const currentTrack = useAppSelector((state) => state.tracks.currentTrack)
   const isPlaying = useAppSelector((state) => state.tracks.isPlaying)
-  const isMuted = useAppSelector((state) => state.tracks.isMuted)
-  const volume = useAppSelector((state) => state.tracks.volume)
+  const isShuffled = useAppSelector((state) => state.tracks.isShuffled)
+
+  const [duration, setDuration] = useState(0)
+  const [currentTime, setCurrentTime] = useState(0)
+  const [volume, setVolume] = useState(0.8)
+  const [isMuted, setIsMuted] = useState(false)
+  const [isLooping, setIsLooping] = useState(false)
+  const [isLoaded, setIsLoaded] = useState(false)
+  const [isSeeking, setIsSeeking] = useState(false)
+  const wasPlayingRef = useRef(false)
 
   const audioRef = useRef<HTMLAudioElement | null>(null)
 
+  const progressText = `${formatDuration(currentTime)} / ${formatDuration(isLoaded ? duration : 0)}`
+
   useEffect(() => {
-    if (!audioRef.current || !currentTrack) return
+    setIsLoaded(false)
+  }, [currentTrack])
+
+  useEffect(() => {
+    if (!audioRef.current || !currentTrack || !isLoaded) return
 
     audioRef.current.volume = volume
+    audioRef.current.muted = isMuted
 
-    if (isPlaying) {
+    if (isPlaying && !isSeeking) {
       audioRef.current.play().catch((error) => {
-        console.error('Не удалось запустить аудио:', error)
-        dispatch(setIsPlaying(false))
+        if (error.name !== 'AbortError') {
+          console.error('Не удалось запустить аудио:', error)
+          dispatch(setIsPlaying(false))
+        }
       })
     } else {
       audioRef.current.pause()
     }
+  }, [currentTrack, isLoaded, isPlaying, isSeeking, isMuted, volume, dispatch])
 
-    if (isMuted) {
-      audioRef.current.muted = true
-    } else {
-      audioRef.current.muted = false
+  useEffect(() => {
+    if (!isPlaying || isSeeking) return
+
+    // отвечает за плавность заполнения полосы прогресса трека
+    let animationFrameId: number
+
+    const updateProgress = () => {
+      if (audioRef.current) {
+        setCurrentTime(audioRef.current.currentTime)
+      }
+
+      animationFrameId = requestAnimationFrame(updateProgress)
     }
-  }, [currentTrack, isPlaying, isMuted, volume, dispatch])
+
+    animationFrameId = requestAnimationFrame(updateProgress)
+
+    return () => {
+      cancelAnimationFrame(animationFrameId)
+    }
+  }, [isPlaying, isSeeking])
 
   if (!currentTrack) return <></>
 
-  const playTrack = () => {
+  const togglePlay = () => dispatch(setIsPlaying(!isPlaying))
+  const toggleShuffle = () => dispatch(toggleIsShuffled())
+
+  const handleNextTrack = () => dispatch(setNextTrack())
+  const handlePrevTrack = () => {
     if (audioRef.current) {
-      audioRef.current.play()
+      audioRef.current.currentTime = 0
+      setCurrentTime(0)
+    }
+    dispatch(setPrevTrack())
+  }
+
+  const handleLoadedMetadata = () => {
+    setIsLoaded(true)
+    setDuration(audioRef.current?.duration || 0)
+  }
+
+  const handleProgressChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (audioRef.current) {
+      audioRef.current.currentTime = Number(e.target.value)
+      setCurrentTime(Number(e.target.value))
+    }
+  }
+
+  const handleSeekStart = () => {
+    wasPlayingRef.current = isPlaying
+    setIsSeeking(true)
+  }
+
+  const handleSeekEnd = () => {
+    setIsSeeking(false)
+
+    if (wasPlayingRef.current) {
       dispatch(setIsPlaying(true))
     }
   }
 
-  const pauseTrack = () => {
-    if (audioRef.current) {
-      audioRef.current.pause()
-      dispatch(setIsPlaying(false))
+  const handleVolumeUpdate = (e: ChangeEvent<HTMLInputElement>) => {
+    const newVolume = Number(e.target.value) / 100
+    setVolume(newVolume)
+
+    if (newVolume === 0) {
+      setIsMuted(true)
+    } else {
+      setIsMuted(false)
     }
   }
 
@@ -64,20 +133,46 @@ export default function Bar() {
         ref={audioRef}
         src={currentTrack?.track_file}
         controls
+        loop={isLooping}
+        onLoadedMetadata={handleLoadedMetadata}
+        onEnded={handleNextTrack}
       />
+
       <div className={style.bar__content}>
-        <div className={style.bar__playerProgress}></div>
+        <ProgressBar
+          max={duration}
+          value={currentTime}
+          onChange={(e) => handleProgressChange(e)}
+          readOnly={!isLoaded}
+          onMouseDown={handleSeekStart}
+          onMouseUp={handleSeekEnd}
+        />
+
+        {!isLoaded && (
+          <div className={style.bar__loading}>
+            <p>Загрузка трека...</p>
+          </div>
+        )}
+
+        <div className={style.bar__progress}>
+          <p>{progressText}</p>
+        </div>
+
         <div className={style.bar__playerBlock}>
           <div className={style.bar__player}>
             <div className={style.player__controls}>
-              <div className={style.player__btnPrev}>
+              <button
+                onClick={handlePrevTrack}
+                className={style.player__btnPrev}
+              >
                 <svg className={style.player__btnPrevSvg}>
                   <use xlinkHref="/img/icon/sprite.svg#icon-prev"></use>
                 </svg>
-              </div>
-              <div
+              </button>
+              <button
                 className={cn(style.player__btnPlay, style.btn)}
-                onClick={isPlaying ? pauseTrack : playTrack}
+                disabled={!isLoaded}
+                onClick={togglePlay}
               >
                 <svg className={style.player__btnPlaySvg}>
                   <use
@@ -88,22 +183,36 @@ export default function Bar() {
                     }
                   ></use>
                 </svg>
-              </div>
-              <div className={style.player__btnNext}>
+              </button>
+              <button
+                onClick={handleNextTrack}
+                className={style.player__btnNext}
+              >
                 <svg className={style.player__btnNextSvg}>
                   <use xlinkHref="/img/icon/sprite.svg#icon-next"></use>
                 </svg>
-              </div>
-              <div className={cn(style.player__btnRepeat, style.btnIcon)}>
+              </button>
+              <button
+                className={cn(style.player__btnRepeat, style.btnIcon, {
+                  [style.player__btnActive]: isLooping,
+                })}
+                disabled={!isLoaded}
+                onClick={() => setIsLooping((prev) => !prev)}
+              >
                 <svg className={style.player__btnRepeatSvg}>
                   <use xlinkHref="/img/icon/sprite.svg#icon-repeat"></use>
                 </svg>
-              </div>
-              <div className={cn(style.player__btnShuffle, style.btnIcon)}>
+              </button>
+              <button
+                onClick={toggleShuffle}
+                className={cn(style.player__btnShuffle, style.btnIcon, {
+                  [style.player__btnActive]: isShuffled,
+                })}
+              >
                 <svg className={style.player__btnShuffleSvg}>
                   <use xlinkHref="/img/icon/sprite.svg#icon-shuffle"></use>
                 </svg>
-              </div>
+              </button>
             </div>
 
             <div className={style.player__trackPlay}>
@@ -149,18 +258,20 @@ export default function Bar() {
           </div>
           <div className={style.bar__volumeBlock}>
             <div className={style.volume__content}>
-              <div
+              <button
                 className={style.volume__image}
-                onClick={() => dispatch(setIsMuted(!isMuted))}
+                onClick={() => setIsMuted((prev) => !prev)}
               >
-                <svg className={style.volume__svg}>
+                <svg className={style.volume__svg} aria-hidden="true">
                   <use
                     xlinkHref={
-                      isMuted ? '/img/icon/muted.svg' : '/img/icon/volume.svg'
+                      isMuted
+                        ? '/img/icon/sprite.svg#icon-muted'
+                        : '/img/icon/sprite.svg#icon-volume'
                     }
                   ></use>
                 </svg>
-              </div>
+              </button>
               <div className={cn(style.volume__progress, style.btn)}>
                 <input
                   className={cn(style.volume__progressLine, style.btn)}
@@ -168,17 +279,7 @@ export default function Bar() {
                   min="0"
                   max="100"
                   value={isMuted ? 0 : volume * 100}
-                  onChange={(e) => {
-                    const newVolume = Number(e.target.value) / 100
-
-                    dispatch(setVolume(newVolume))
-
-                    if (newVolume === 0) {
-                      dispatch(setIsMuted(true))
-                    } else {
-                      dispatch(setIsMuted(false))
-                    }
-                  }}
+                  onChange={(e) => handleVolumeUpdate(e)}
                 />
               </div>
             </div>

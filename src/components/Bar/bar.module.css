@@ -1,11 +1,12 @@
 .bar {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
   background: rgba(28, 28, 28, 0.5);
   backdrop-filter: blur(4px);
-  box-shadow: 0px -4px 16px 8px rgba(24, 24, 24, 1);
+  box-shadow: 0 -2px 20px 0px #181818;
+  z-index: 5;
 }
 
 .bar__audio {
@@ -20,12 +21,24 @@
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
+
+  position: relative;
 }
 
-.bar__playerProgress {
-  width: 100%;
-  height: 5px;
-  background: #2e2e2e;
+.bar__progress {
+  position: absolute;
+  right: 12px;
+  bottom: 80px;
+
+  color: rgba(217, 217, 217, 1);
+}
+
+.bar__loading {
+  position: absolute;
+  left: 12px;
+  bottom: 80px;
+
+  color: rgba(217, 217, 217, 1);
 }
 
 .bar__playerBlock {
@@ -106,6 +119,13 @@
   }
 }
 
+.player__btnPrev,
+.player__btnNext {
+  &:active {
+    color: rgba(217, 217, 217, 1);
+  }
+}
+
 .player__btnPrev {
   margin-right: 23px;
 }
@@ -126,7 +146,6 @@
 
 .player__btnNext {
   margin-right: 28px;
-  fill: #a53939;
 }
 
 .player__btnNextSvg {
@@ -136,13 +155,18 @@
 
 .player__btnRepeat {
   margin-right: 24px;
+  color: #696969;
+  stroke: #696969;
+
+  &:hover {
+    color: rgba(172, 172, 172, 1);
+    stroke: rgba(172, 172, 172, 1);
+  }
 }
 
 .player__btnRepeatSvg {
   width: 18px;
   height: 12px;
-  fill: transparent;
-  stroke: #696969;
 }
 
 .player__btnShuffle {
@@ -152,13 +176,12 @@
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  color: rgba(105, 105, 105, 1);
 }
 
 .player__btnShuffleSvg {
   width: 19px;
   height: 12px;
-  fill: transparent;
-  stroke: #696969;
 }
 
 .player__trackPlay {
@@ -292,12 +315,17 @@
   height: 18px;
   margin-right: 17px;
   cursor: pointer;
+  color: rgba(217, 217, 217, 1);
+
+  &:hover {
+    color: rgba(172, 172, 172, 1);
+  }
 }
 
 .volume__svg {
   width: 13px;
   height: 18px;
-  fill: transparent;
+  display: block;
 }
 
 .volume__progress {
@@ -354,4 +382,9 @@
   fill: #696969;
   stroke: #ffffff;
   cursor: pointer;
+}
+
+.player__btnActive {
+  color: rgba(255, 255, 255, 1);
+  stroke: rgba(255, 255, 255, 1);
 }

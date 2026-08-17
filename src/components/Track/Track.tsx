@@ -1,7 +1,11 @@
 'use client'
 
 import { TrackType } from '@/sharedTypes/sharedTypes'
-import { setCurrentTrack, setIsPlaying } from '@/store/features/trackSlice'
+import {
+  setCurrentTrack,
+  setIsPlaying,
+  setPlaylist,
+} from '@/store/features/trackSlice'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { formatDuration } from '@/utils/formatDuration'
 import cn from 'classnames'
@@ -10,9 +14,10 @@ import style from './track.module.css'
 
 type TrackProps = {
   track: TrackType
+  playlist: TrackType[]
 }
 
-export default function Track({ track }: TrackProps) {
+export default function Track({ track, playlist }: TrackProps) {
   const dispatch = useAppDispatch()
   const currentTrack = useAppSelector((state) => state.tracks.currentTrack)
 
@@ -25,6 +30,7 @@ export default function Track({ track }: TrackProps) {
       dispatch(setIsPlaying(!isTrackPlaying))
     } else {
       dispatch(setCurrentTrack(track))
+      dispatch(setPlaylist(playlist))
       dispatch(setIsPlaying(true))
     }
   }
