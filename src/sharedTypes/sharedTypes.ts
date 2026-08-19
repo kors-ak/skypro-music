@@ -13,3 +13,10 @@ export type TrackType = {
   track_file: string
   staredUser: number[]
 }
+
+export type FormErrors = {
+  email: string
+  password: string
+  username?: string
+  secondPassword?: string
+}

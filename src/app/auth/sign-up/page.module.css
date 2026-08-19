@@ -76,9 +76,8 @@
 }
 
 .errorContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  font-size: 12px;
+  text-align: center;
+  margin-top: -18px;
+  font-size: 14px;
   color: red;
 }
