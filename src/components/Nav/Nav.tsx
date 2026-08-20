@@ -1,13 +1,17 @@
 'use client'
 
+import { useAppSelector } from '@/store/hooks'
 import cn from 'classnames'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
+import ExitPopup from '../ExitPopup/ExitPopup'
 import style from './nav.module.css'
 
 export default function Nav() {
+  const username = useAppSelector((state) => state.user.username)
   const [isOpen, setIsOpen] = useState(false)
+  const [confirm, setConfirm] = useState(false)
 
   const handleMenuToggle = () => {
     setIsOpen((prev) => !prev)
@@ -43,13 +47,23 @@ export default function Nav() {
               </Link>
             </li>
             <li className={style.menu__item}>
-              <Link href="/auth/sign-in" className={style.menu__link}>
-                Войти
-              </Link>
+              {username ? (
+                <p
+                  className={style.menu__link}
+                  onClick={() => setConfirm(true)}
+                >
+                  Выйти
+                </p>
+              ) : (
+                <Link href="/auth/sign-in" className={style.menu__link}>
+                  Войти
+                </Link>
+              )}
             </li>
           </ul>
         </div>
       </div>
+      {confirm && <ExitPopup callback={setConfirm} />}
     </nav>
   )
 }

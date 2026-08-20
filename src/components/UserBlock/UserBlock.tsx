@@ -14,7 +14,11 @@ export default function UserBlock() {
       <p className={style.sidebar__personalName}>{username}</p>
       <button className={style.sidebar__icon} onClick={() => setConfirm(true)}>
         <svg>
-          <use xlinkHref="/img/icon/sprite.svg#logout"></use>
+          {username ? (
+            <use xlinkHref="/img/icon/sprite.svg#logout"></use>
+          ) : (
+            <use xlinkHref="/img/icon/sprite.svg#login"></use>
+          )}
         </svg>
       </button>
 
