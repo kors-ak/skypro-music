@@ -1,10 +1,12 @@
 import { trackSliceReducer } from '@/store/features/trackSlice'
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
+import { userSliceReducer } from './features/userSlice'
 
 export const makeStore = () => {
   return configureStore({
     reducer: combineReducers({
       tracks: trackSliceReducer,
+      user: userSliceReducer,
     }),
   })
 }

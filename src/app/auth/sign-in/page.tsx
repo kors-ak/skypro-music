@@ -3,6 +3,8 @@
 import { loginUser } from '@/services/authApi'
 import { handleAuthError } from '@/services/errorHandling'
 import { FormErrors } from '@/sharedTypes/sharedTypes'
+import { setUser } from '@/store/features/userSlice'
+import { useAppDispatch } from '@/store/hooks'
 import { validateLogin, validatePassword } from '@/utils/validation'
 import cn from 'classnames'
 import Link from 'next/link'
@@ -11,6 +13,7 @@ import { ChangeEvent, useState } from 'react'
 import style from './page.module.css'
 
 export default function Signin() {
+  const dispatch = useAppDispatch()
   const router = useRouter()
   const [errors, setErrors] = useState<FormErrors>({
     email: '',
@@ -60,6 +63,11 @@ export default function Signin() {
     if (newErrors.email || newErrors.password) return
 
     loginUser({ email, password })
+      .then((data) => {
+        dispatch(setUser({ username: data.username, id: data._id }))
+        localStorage.setItem('username', data.username)
+        localStorage.setItem('id', String(data._id))
+      })
       .then(() => router.replace('/music/main'))
       .catch((error) => handleAuthError(error, setApiError))
   }

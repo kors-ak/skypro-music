@@ -1,18 +1,12 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import UserBlock from '../UserBlock/UserBlock'
 import style from './sidebar.module.css'
 
 export default function Sidebar() {
   return (
     <div className={style.main__sidebar}>
-      <div className={style.sidebar__personal}>
-        <p className={style.sidebar__personalName}>Sergey.Ivanov</p>
-        <div className={style.sidebar__icon}>
-          <svg>
-            <use xlinkHref="/img/icon/sprite.svg#logout"></use>
-          </svg>
-        </div>
-      </div>
+      <UserBlock />
       <div className={style.sidebar__block}>
         <div className={style.sidebar__list}>
           <div className={style.sidebar__item}>

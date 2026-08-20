@@ -1,3 +1,4 @@
+import UserInitializer from '@/components/UserInitializer'
 import ReduxProvider from '@/store/ReduxProvider'
 import type { Metadata } from 'next'
 import { Montserrat } from 'next/font/google'
@@ -21,7 +22,10 @@ export default function RootLayout({
   return (
     <ReduxProvider>
       <html lang="ru" className={montserrat.variable}>
-        <body>{children}</body>
+        <body>
+          <UserInitializer />
+          {children}
+        </body>
       </html>
     </ReduxProvider>
   )

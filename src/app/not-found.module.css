@@ -1,19 +1,45 @@
 .wrapper {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
+  min-height: 100%;
 }
 
 .container {
-  width: 100%;
-  max-width: 1200px;
-  padding: 0 24px;
+  max-width: 1920px;
+  height: 100vh;
+  margin: 0 auto;
+  position: relative;
+}
+
+.main {
+  height: 100vh;
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.centerblock {
+  width: auto;
+  -webkit-box-flex: 3;
+  -ms-flex-positive: 3;
+  flex-grow: 3;
+  padding: 20px 40px 20px 111px;
 }
 
 .card {
-  text-align: center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   color: #ffffff;
+  text-align: center;
 }
 
 .code {
@@ -61,4 +87,9 @@
 
 .button:active {
   background-color: rgb(39, 26, 88);
+}
+
+.userblock {
+  max-width: 418px;
+  padding: 20px 90px 20px 78px;
 }

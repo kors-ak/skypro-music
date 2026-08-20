@@ -16,11 +16,7 @@ type SignupProps = LoginProps & { username: string }
 
 type SignupResponse = {
   message: string
-  result: {
-    username: string
-    email: string
-    _id: number
-  }
+  result: LoginProps
   success: boolean
 }
 
