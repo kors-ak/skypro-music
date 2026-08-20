@@ -1,20 +1,28 @@
 import axios from 'axios'
 
-export const handleTasksError = (
+export const handleTracksError = (
   error: unknown,
-  callback: (message: string) => void
+  callback: (message: { title: string; subtitle: string }) => void
 ) => {
   if (axios.isAxiosError(error)) {
     if (error.response) {
-      callback(
-        error.response.data?.error ||
+      callback({
+        title:
+          error.response.data?.error ||
           error.response.data?.message ||
-          'Что-то пошло не так, попробуйте позже'
-      )
+          'Что-то пошло не так',
+        subtitle: 'Обновите страницу и повторите попытку',
+      })
     } else if (error.request) {
-      callback('Нет подключения к интернету')
+      callback({
+        title: 'Ошибка загрузки',
+        subtitle: 'Проверьте подключение к сети и повторите попытку',
+      })
     } else {
-      callback('Не удалось загрузить музыку, попробуйте позже')
+      callback({
+        title: 'Не удалось загрузить треки',
+        subtitle: 'Попробуйте повторить попытку',
+      })
     }
   }
 }
