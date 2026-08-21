@@ -14,7 +14,6 @@
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.2s ease;
-  z-index: -1;
 }
 
 .main__nav_active::before {
@@ -22,6 +21,8 @@
 }
 
 .nav__logo {
+  position: relative;
+  z-index: 1;
   width: 113.33px;
   height: 43px;
   padding: 13px 0 13px 0;
@@ -30,6 +31,8 @@
 }
 
 .nav__burger {
+  position: relative;
+  z-index: 1;
   width: 20px;
   height: 36px;
   padding: 13px 0;
