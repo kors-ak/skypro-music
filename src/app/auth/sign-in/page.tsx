@@ -23,6 +23,7 @@ export default function Signin() {
   const [password, setPassword] = useState('')
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [apiError, setApiError] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleLoginChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value
@@ -62,6 +63,8 @@ export default function Signin() {
 
     if (newErrors.email || newErrors.password) return
 
+    setIsLoading(true)
+
     loginUser({ email, password })
       .then((data) => {
         dispatch(setUser({ username: data.username, id: data._id }))
@@ -70,6 +73,7 @@ export default function Signin() {
       })
       .then(() => router.replace('/music/main'))
       .catch((error) => handleAuthError(error, setApiError))
+      .finally(() => setIsLoading(false))
   }
 
   return (
@@ -104,6 +108,7 @@ export default function Signin() {
         type="button"
         className={style.modal__btnEnter}
         onClick={handleSubmit}
+        disabled={isLoading}
       >
         Войти
       </button>

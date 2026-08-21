@@ -75,6 +75,11 @@
   &:active {
     background-color: #271a58;
   }
+
+  &:disabled {
+    cursor: not-allowed;
+    background-color: #271a58;
+  }
 }
 
 .modal__btnSignup {

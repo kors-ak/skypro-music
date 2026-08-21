@@ -25,6 +25,7 @@ export default function SignUp() {
   const [secondPassword, setSecondPassword] = useState('')
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [apiError, setApiError] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleLoginChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value
@@ -79,11 +80,14 @@ export default function SignUp() {
     if (newErrors.email || newErrors.password || newErrors.secondPassword)
       return
 
+    setIsLoading(true)
+
     const username = email.split('@')[0]
 
     signupUser({ email, username, password })
       .then(() => router.replace('/auth/sign-in'))
       .catch((error) => handleAuthError(error, setApiError))
+      .finally(() => setIsLoading(false))
   }
 
   return (
@@ -130,6 +134,7 @@ export default function SignUp() {
         type="button"
         className={style.modal__btnSignupEnt}
         onClick={handleSubmit}
+        disabled={isLoading}
       >
         Зарегистрироваться
       </button>
