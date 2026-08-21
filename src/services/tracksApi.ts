@@ -1,5 +1,4 @@
 import { TrackType } from '@/sharedTypes/sharedTypes'
-import axios from 'axios'
 import { BASE_URL } from './constants'
 
 type CategoryType = {
@@ -10,12 +9,34 @@ type CategoryType = {
   __v: number
 }
 
-export const getTracks = async (): Promise<TrackType[]> => {
-  return axios(BASE_URL + '/catalog/track/all/').then((res) => res.data.data)
+export const getTracks = (): Promise<TrackType[]> => {
+  return fetch(`${BASE_URL}/catalog/track/all/`, {
+    next: {
+      revalidate: 3600,
+    },
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Не удалось загрузить треки')
+      }
+
+      return response.json()
+    })
+    .then((res) => res.data)
 }
 
-export const getCategoryTraks = async (id: number): Promise<CategoryType> => {
-  return axios(BASE_URL + `/catalog/selection/${++id}/`).then(
-    (res) => res.data.data
-  )
+export const getCategoryTraks = (id: number): Promise<CategoryType> => {
+  return fetch(`${BASE_URL}/catalog/selection/${++id}/`, {
+    next: {
+      revalidate: 3600,
+    },
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Не удалось загрузить категорию')
+      }
+
+      return response.json()
+    })
+    .then((res) => res.data)
 }
