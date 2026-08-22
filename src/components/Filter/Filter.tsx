@@ -18,6 +18,8 @@ export default function Filter({ tracks }: { tracks: TrackType[] }) {
 
   return (
     <div className={style.centerblock__filter}>
+      <div className={style.filter__title}>Искать по:</div>
+
       <FilterItem
         label="исполнителю"
         isOpen={activeFilter === 'author'}

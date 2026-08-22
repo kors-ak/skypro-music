@@ -3,7 +3,7 @@ import style from './filterItem.module.css'
 type FilterItemProps = {
   label: string
   isOpen: boolean
-  onClick: () => void
+  onClick?: () => void
   items: string[]
 }
 
