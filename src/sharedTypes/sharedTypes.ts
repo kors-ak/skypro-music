@@ -9,7 +9,7 @@ export type TrackType = {
   logo: {
     type: string
     data: number[]
-  }
+  } | null
   track_file: string
   staredUser: number[]
 }
