@@ -1,3 +1,13 @@
+@keyframes skeleton-loading {
+  0% {
+    background-position: 100% 0;
+  }
+
+  100% {
+    background-position: -100% 0;
+  }
+}
+
 .sidebar__block {
   padding: 240px 0 0 0;
   display: -webkit-box;
@@ -28,27 +38,16 @@
 .sidebar__item {
   width: 250px;
   height: 150px;
+  background: linear-gradient(
+    90deg,
+    rgba(49, 49, 49, 1) 0%,
+    rgba(61, 61, 61, 1) 50%,
+    rgba(49, 49, 49, 1) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 2.5s ease-in-out infinite;
 }
 
 .sidebar__item:not(:last-child) {
   margin-bottom: 30px;
-}
-
-.sidebar__link {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-.sidebar__img {
-  width: 100%;
-  height: auto;
-}
-
-.error {
-  color: #696969;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 24px;
-  text-align: center;
 }

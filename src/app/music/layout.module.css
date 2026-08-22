@@ -33,3 +33,8 @@
   flex-grow: 3;
   padding: 20px 40px 20px 111px;
 }
+
+.main__sidebar {
+  max-width: 418px;
+  padding: 20px 90px 20px 78px;
+}

@@ -1,8 +1,10 @@
 import Bar from '@/components/Bar/Bar'
+import CategoriesLoading from '@/components/loading/CategoriesLoading/CategoriesLoading'
 import Nav from '@/components/Nav/Nav'
 import Search from '@/components/Search/Search'
 import Sidebar from '@/components/Sidebar/Sidebar'
-import { ReactNode } from 'react'
+import UserBlock from '@/components/UserBlock/UserBlock'
+import { ReactNode, Suspense } from 'react'
 import style from './layout.module.css'
 
 type MusicLayoutProps = {
@@ -21,7 +23,12 @@ export default function MusicLayout({ children }: MusicLayoutProps) {
             {children}
           </div>
 
-          <Sidebar />
+          <div className={style.main__sidebar}>
+            <UserBlock />
+            <Suspense fallback={<CategoriesLoading />}>
+              <Sidebar />
+            </Suspense>
+          </div>
         </main>
 
         <Bar />
