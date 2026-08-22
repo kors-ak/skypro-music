@@ -37,7 +37,6 @@ export default async function Sidebar() {
                   alt={category.name || ''}
                   width={250}
                   height={150}
-                  quality={100}
                   loading="eager"
                   unoptimized
                 />

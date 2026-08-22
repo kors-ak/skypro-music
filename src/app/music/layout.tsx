@@ -1,6 +1,5 @@
 import Bar from '@/components/Bar/Bar'
-import CategoriesLoading from '@/components/loading/CategoriesLoading/CategoriesLoading'
-import TracksLoading from '@/components/loading/TracksLoading/TracksLoading'
+import CategoriesLoading from '@/components/CategoriesLoading/CategoriesLoading'
 import Nav from '@/components/Nav/Nav'
 import Search from '@/components/Search/Search'
 import Sidebar from '@/components/Sidebar/Sidebar'
@@ -21,7 +20,7 @@ export default function MusicLayout({ children }: MusicLayoutProps) {
 
           <div className={style.centerblock}>
             <Search />
-            <Suspense fallback={<TracksLoading />}>{children}</Suspense>
+            {children}
           </div>
 
           <div className={style.main__sidebar}>

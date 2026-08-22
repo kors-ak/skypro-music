@@ -20,8 +20,9 @@
 }
 
 .heading {
-  width: 340px;
+  width: 400px;
   height: 72px;
+  margin-bottom: 45px;
 }
 
 .centerblock__filter {
@@ -74,17 +75,6 @@
   margin-bottom: 24px;
 }
 
-.content__playlist {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  overflow-y: auto;
-}
-
 .playlistTitle__col {
   font-style: normal;
   font-weight: 400;
@@ -119,11 +109,22 @@
   text-align: end;
 }
 
+.content__playlist {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
 .playlist__item {
   width: 100%;
   display: block;
   margin-bottom: 12px;
-  cursor: pointer;
+  cursor: wait;
 }
 
 .playlist__track {
@@ -134,9 +135,6 @@
   -webkit-box-direction: normal;
   -ms-flex-direction: row;
   flex-direction: row;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
@@ -153,26 +151,26 @@
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  width: 447px;
 }
 
 .track__titleImage {
   width: 51px;
   height: 51px;
-  margin-right: 17px;
+  margin-right: 14px;
 }
 
 .track__titleLink {
-  width: 356px;
+  width: 334px;
   height: 19px;
 }
 
 .track__author {
+  margin: 0 60px;
   width: 271px;
   height: 19px;
 }
 
 .track__additional {
-  width: 305px;
+  width: 316px;
   height: 19px;
 }

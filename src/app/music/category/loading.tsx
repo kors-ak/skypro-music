@@ -1,8 +1,8 @@
 import FilterItem from '@/components/FilterItem/FilterItem'
 import cn from 'classnames'
-import style from './tracksLoading.module.css'
+import style from './loading.module.css'
 
-const quantity = Math.floor(Math.random() * 8)
+const quantity = 7
 
 export default function TracksLoading() {
   return (
@@ -41,12 +41,12 @@ export default function TracksLoading() {
                     className={cn(style.sceleton, style.track__titleImage)}
                   />
 
-                  <div className={style.track__titleLink} />
+                  <div className={cn(style.sceleton, style.track__titleLink)} />
                 </div>
 
-                <div className={style.track__author} />
+                <div className={cn(style.sceleton, style.track__author)} />
 
-                <div className={style.track__additional} />
+                <div className={cn(style.sceleton, style.track__additional)} />
               </div>
             </div>
           ))}
