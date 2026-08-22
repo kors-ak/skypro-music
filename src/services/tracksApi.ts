@@ -3,7 +3,7 @@ import { BASE_URL } from './constants'
 
 type CategoryType = {
   _id: number
-  name: string
+  name?: string
   items: number[]
   owner: number[]
   __v: number
@@ -34,6 +34,22 @@ export const getCategoryTraks = (id: number): Promise<CategoryType> => {
     .then((response) => {
       if (!response.ok) {
         throw new Error('Не удалось загрузить категорию')
+      }
+
+      return response.json()
+    })
+    .then((res) => res.data)
+}
+
+export const getCategories = (): Promise<CategoryType[]> => {
+  return fetch(`${BASE_URL}/catalog/selection/all/`, {
+    next: {
+      revalidate: 3600,
+    },
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Не удалось загрузить категории')
       }
 
       return response.json()
