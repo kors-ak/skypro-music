@@ -7,7 +7,6 @@ import {
   toggleIsShuffled,
 } from '@/store/features/trackSlice'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
-import { formatDuration } from '@/utils/formatDuration'
 import cn from 'classnames'
 import Link from 'next/link'
 import { ChangeEvent, useEffect, useRef, useState } from 'react'
@@ -30,8 +29,6 @@ export default function Bar() {
   const wasPlayingRef = useRef(false)
 
   const audioRef = useRef<HTMLAudioElement | null>(null)
-
-  const progressText = `${formatDuration(currentTime)} / ${formatDuration(isLoaded ? duration : 0)}`
 
   useEffect(() => {
     setIsLoaded(false)
@@ -148,16 +145,6 @@ export default function Bar() {
           onMouseUp={handleSeekEnd}
         />
 
-        {!isLoaded && (
-          <div className={style.bar__loading}>
-            <p>Загрузка трека...</p>
-          </div>
-        )}
-
-        <div className={style.bar__progress}>
-          <p>{progressText}</p>
-        </div>
-
         <div className={style.bar__playerBlock}>
           <div className={style.bar__player}>
             <div className={style.player__controls}>
@@ -218,17 +205,9 @@ export default function Bar() {
             <div className={style.player__trackPlay}>
               <div className={style.trackPlay__contain}>
                 <div className={style.trackPlay__image}>
-                  {currentTrack.logo ? (
-                    <img
-                      className={style.trackPlay__img}
-                      src={currentTrack.logo}
-                      alt={currentTrack.name}
-                    />
-                  ) : (
-                    <svg className={style.trackPlay__svg}>
-                      <use xlinkHref="/img/icon/sprite.svg#icon-note"></use>
-                    </svg>
-                  )}
+                  <svg className={style.trackPlay__svg}>
+                    <use xlinkHref="/img/icon/sprite.svg#icon-note"></use>
+                  </svg>
                 </div>
                 <div className={style.trackPlay__name}>
                   <Link className={style.trackPlay__nameLink} href="">

@@ -1,12 +1,6 @@
-.centerblock {
-  width: auto;
-  -webkit-box-flex: 3;
-  -ms-flex-positive: 3;
-  flex-grow: 3;
-  padding: 20px 40px 20px 111px;
-}
-
-.centerblock__h2 {
+.heading {
+  display: block;
+  height: 72px;
   font-style: normal;
   font-weight: 400;
   font-size: 64px;

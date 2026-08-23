@@ -40,25 +40,16 @@ export default function Track({ track, playlist }: TrackProps) {
       <div className={style.playlist__track}>
         <div className={style.track__title}>
           <div className={style.track__titleImage}>
-            {track.logo ? (
-              <img
-                className={style.track__titleImg}
-                src={track.logo}
-                alt={track.name}
-              />
-            ) : (
-              !isCurrentTrack && (
-                <svg className={style.track__titleSvg}>
-                  <use xlinkHref="/img/icon/sprite.svg#icon-note"></use>
-                </svg>
-              )
-            )}
-            {isCurrentTrack && (
+            {isCurrentTrack ? (
               <div
                 className={cn(style.track__dot, {
                   [style.pulse]: isTrackPlaying,
                 })}
-              ></div>
+              />
+            ) : (
+              <svg className={style.track__titleSvg}>
+                <use xlinkHref="/img/icon/sprite.svg#icon-note" />
+              </svg>
             )}
           </div>
           <div>
