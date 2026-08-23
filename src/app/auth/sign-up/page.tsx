@@ -31,6 +31,7 @@ export default function SignUp() {
     const value = event.target.value
 
     setEmail(value)
+    setApiError('')
 
     if (isSubmitted) {
       setErrors((prev) => ({
@@ -44,6 +45,7 @@ export default function SignUp() {
     const value = event.target.value
 
     setPassword(value)
+    setApiError('')
 
     if (isSubmitted) {
       setErrors((prev) => ({
@@ -57,6 +59,7 @@ export default function SignUp() {
     const value = event.target.value
 
     setSecondPassword(value)
+    setApiError('')
 
     if (isSubmitted) {
       setErrors((prev) => ({

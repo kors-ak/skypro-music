@@ -33,7 +33,7 @@ export const validateSecondPassword = (
   if (!password) return 'Повторите пароль'
 
   if (password !== firstPassword) {
-    return 'Пароль не соответсвует первому'
+    return 'Пароли не совпадают'
   }
 
   return ''
