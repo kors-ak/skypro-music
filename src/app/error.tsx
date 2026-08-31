@@ -1,10 +1,10 @@
 'use client'
 
-import Bar from '@/components/Bar/Bar'
-import ErrorBlock from '@/components/ErrorBlock/ErrorBlock'
+import Bar from '@/components/features/Bar/Bar'
+import ErrorBlock from '@/components/features/ErrorBlock/ErrorBlock'
+import Search from '@/components/features/Search/Search'
+import UserBlock from '@/components/features/UserBlock/UserBlock'
 import Nav from '@/components/Nav/Nav'
-import Search from '@/components/Search/Search'
-import UserBlock from '@/components/UserBlock/UserBlock'
 import { useEffect } from 'react'
 import style from './error.module.css'
 

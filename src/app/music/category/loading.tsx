@@ -1,4 +1,4 @@
-import FilterItem from '@/components/FilterItem/FilterItem'
+import FilterItem from '@/components/features/FilterItem/FilterItem'
 import cn from 'classnames'
 import style from './loading.module.css'
 

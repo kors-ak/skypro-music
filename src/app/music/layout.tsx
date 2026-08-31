@@ -1,9 +1,9 @@
-import Bar from '@/components/Bar/Bar'
-import CategoriesLoading from '@/components/CategoriesLoading/CategoriesLoading'
+import Bar from '@/components/features/Bar/Bar'
+import Search from '@/components/features/Search/Search'
+import UserBlock from '@/components/features/UserBlock/UserBlock'
+import CategoriesLoading from '@/components/loading/CategoriesLoading/CategoriesLoading'
 import Nav from '@/components/Nav/Nav'
-import Search from '@/components/Search/Search'
 import Sidebar from '@/components/Sidebar/Sidebar'
-import UserBlock from '@/components/UserBlock/UserBlock'
 import { ReactNode, Suspense } from 'react'
 import style from './layout.module.css'
 

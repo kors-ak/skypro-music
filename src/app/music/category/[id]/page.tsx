@@ -1,5 +1,5 @@
-import Filter from '@/components/Filter/Filter'
-import TracksContainer from '@/components/TracksContainer/TracksContainer'
+import Filter from '@/components/features/Filter/Filter'
+import TracksContainer from '@/components/features/TracksContainer/TracksContainer'
 import { getCategoryTraks, getTracks } from '@/services/tracksApi'
 import style from './page.module.css'
 
