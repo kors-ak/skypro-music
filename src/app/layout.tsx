@@ -1,4 +1,4 @@
-import UserInitializer from '@/components/UserInitializer'
+import UserInitializer from '@/components/initialization/UserInitializer'
 import ReduxProvider from '@/store/ReduxProvider'
 import type { Metadata } from 'next'
 import { Montserrat } from 'next/font/google'
