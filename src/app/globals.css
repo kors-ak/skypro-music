@@ -4,6 +4,11 @@
   box-sizing: border-box;
 }
 
+html {
+  scrollbar-gutter: stable;
+  background-color: #181818;
+}
+
 body {
   font-family: var(--font-montserrat), 'Arial';
 }
