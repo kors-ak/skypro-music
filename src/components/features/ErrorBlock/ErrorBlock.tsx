@@ -6,7 +6,7 @@ type ErrorBlockProps = {
     title: string
     subtitle: string
   }
-  callback: () => Promise<void>
+  callback: (() => Promise<void>) | (() => void)
 }
 
 export default function ErrorBlock({ error, callback }: ErrorBlockProps) {

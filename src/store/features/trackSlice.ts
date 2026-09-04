@@ -87,7 +87,7 @@ const trackSlice = createSlice({
     setAllTracks: (state, action: PayloadAction<TrackType[]>) => {
       state.allTracks = action.payload
     },
-    setFetchError: (state, action: PayloadAction<string>) => {
+    setFetchError: (state, action: PayloadAction<null | string>) => {
       state.fetchError = action.payload
     },
     setFetchIsLoading: (state, action: PayloadAction<boolean>) => {
@@ -103,5 +103,8 @@ export const {
   setNextTrack,
   setPrevTrack,
   toggleIsShuffled,
+  setAllTracks,
+  setFetchError,
+  setFetchIsLoading,
 } = trackSlice.actions
 export const trackSliceReducer = trackSlice.reducer

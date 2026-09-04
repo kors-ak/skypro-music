@@ -29,3 +29,15 @@ export const handleAuthError = (
 
   callback('Не удалось войти. Попробуйте позже')
 }
+
+export const handleTracksError = (error: unknown) => {
+  if (error instanceof Error) {
+    return error.message || 'Что-то пошло не так, повторите попытку'
+  }
+
+  if (error instanceof TypeError) {
+    return 'Проверьте подключение к сети и повторите попытку'
+  }
+
+  return 'Возникла неизвестная ошибка, повторите попытку'
+}
