@@ -15,9 +15,9 @@ import style from './bar.module.css'
 
 export default function Bar() {
   const dispatch = useAppDispatch()
-  const currentTrack = useAppSelector((state) => state.tracks.currentTrack)
-  const isPlaying = useAppSelector((state) => state.tracks.isPlaying)
-  const isShuffled = useAppSelector((state) => state.tracks.isShuffled)
+  const { currentTrack, isPlaying, isShuffled } = useAppSelector(
+    (state) => state.tracks
+  )
 
   const [duration, setDuration] = useState(0)
   const [currentTime, setCurrentTime] = useState(0)

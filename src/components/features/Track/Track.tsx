@@ -19,11 +19,10 @@ type TrackProps = {
 
 export default function Track({ track, playlist }: TrackProps) {
   const dispatch = useAppDispatch()
-  const currentTrack = useAppSelector((state) => state.tracks.currentTrack)
+  const { currentTrack, isPlaying } = useAppSelector((state) => state.tracks)
 
   const isCurrentTrack: boolean = track._id === currentTrack?._id
-  const isTrackPlaying: boolean =
-    useAppSelector((state) => state.tracks.isPlaying) && isCurrentTrack
+  const isTrackPlaying: boolean = isPlaying && isCurrentTrack
 
   const handleClickTrack = () => {
     if (isCurrentTrack) {
