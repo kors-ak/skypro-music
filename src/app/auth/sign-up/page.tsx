@@ -85,10 +85,8 @@ export default function SignUp() {
 
     setIsLoading(true)
 
-    const username = email.split('@')[0]
-
-    signupUser({ email, username, password })
-      .then(() => router.replace('/auth/sign-in'))
+    signupUser({ email, username: email, password })
+      .then(() => router.push('/auth/sign-in'))
       .catch((error) => handleAuthError(error, setApiError))
       .finally(() => setIsLoading(false))
   }

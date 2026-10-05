@@ -1,6 +1,10 @@
 'use client'
 
-import { setUser } from '@/store/features/userSlice'
+import {
+  setAccessToken,
+  setRefreshToken,
+  setUserName,
+} from '@/store/features/userSlice'
 import { useAppDispatch } from '@/store/hooks'
 import { useEffect } from 'react'
 
@@ -8,17 +12,13 @@ export default function UserInitializer() {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    const username = localStorage.getItem('username')
-    const id = localStorage.getItem('id')
+    const username = localStorage.getItem('username') || ''
+    const access = localStorage.getItem('access') || ''
+    const refresh = localStorage.getItem('refresh') || ''
 
-    if (username && id) {
-      dispatch(
-        setUser({
-          username,
-          id: Number(id),
-        })
-      )
-    }
+    dispatch(setUserName(username))
+    dispatch(setAccessToken(access))
+    dispatch(setRefreshToken(refresh))
   }, [dispatch])
 
   return null

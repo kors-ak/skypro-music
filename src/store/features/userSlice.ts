@@ -1,30 +1,44 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-type UserType = {
-  username: string | null
-  id: number | null
-}
-
 type initialStateType = {
-  username: string | null
-  id: number | null
+  username: string
+  access: string
+  refresh: string
 }
 
 const initialState: initialStateType = {
-  username: null,
-  id: null,
+  username: '',
+  access: '',
+  refresh: '',
 }
 
 const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setUser: (state, action: PayloadAction<UserType>) => {
-      state.username = action.payload.username
-      state.id = action.payload.id
+    setUserName: (state, action: PayloadAction<string>) => {
+      state.username = action.payload
+      localStorage.setItem('username', action.payload)
+    },
+    setAccessToken: (state, action: PayloadAction<string>) => {
+      state.access = action.payload
+      localStorage.setItem('access', action.payload)
+    },
+    setRefreshToken: (state, action: PayloadAction<string>) => {
+      state.refresh = action.payload
+      localStorage.setItem('refresh', action.payload)
+    },
+    clearUserData: (state) => {
+      state.username = ''
+      state.access = ''
+      state.refresh = ''
+      localStorage.removeItem('username')
+      localStorage.removeItem('access')
+      localStorage.removeItem('refresh')
     },
   },
 })
 
-export const { setUser } = userSlice.actions
+export const { setUserName, setAccessToken, setRefreshToken, clearUserData } =
+  userSlice.actions
 export const userSliceReducer = userSlice.reducer

@@ -1,4 +1,4 @@
-import { setUser } from '@/store/features/userSlice'
+import { clearUserData } from '@/store/features/userSlice'
 import { useAppDispatch } from '@/store/hooks'
 import { useRouter } from 'next/navigation'
 import style from './ExitPopup.module.css'
@@ -11,9 +11,7 @@ export default function ExitPopup({ callback }: ExitPopupProps) {
   const router = useRouter()
   const dispatch = useAppDispatch()
   const exit = () => {
-    dispatch(setUser({ username: null, id: null }))
-    localStorage.removeItem('username')
-    localStorage.removeItem('id')
+    dispatch(clearUserData())
     router.replace('/auth/sign-in')
   }
 
