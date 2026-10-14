@@ -1,6 +1,6 @@
+import { setFavoriteTracks } from '@/store/features/trackSlice'
 import { clearUserData } from '@/store/features/userSlice'
 import { useAppDispatch } from '@/store/hooks'
-import { useRouter } from 'next/navigation'
 import style from './ExitPopup.module.css'
 
 type ExitPopupProps = {
@@ -8,11 +8,11 @@ type ExitPopupProps = {
 }
 
 export default function ExitPopup({ callback }: ExitPopupProps) {
-  const router = useRouter()
   const dispatch = useAppDispatch()
   const exit = () => {
     dispatch(clearUserData())
-    router.replace('/auth/sign-in')
+    dispatch(setFavoriteTracks([]))
+    callback(false)
   }
 
   return (

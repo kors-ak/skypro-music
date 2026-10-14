@@ -9,7 +9,7 @@ import { useAppSelector } from '@/store/hooks'
 import style from './page.module.css'
 
 export default function HomePage() {
-  const loadTracks = useLoadTracks()
+  const { loadTracks } = useLoadTracks()
   const { allTracks, fetchIsLoading, fetchError } = useAppSelector(
     (store) => store.tracks
   )

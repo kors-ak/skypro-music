@@ -21,21 +21,22 @@
 }
 
 .nav__logo {
+  display: block;
   position: relative;
   z-index: 1;
   width: 113.33px;
   height: 43px;
   padding: 13px 0 13px 0;
   background-color: transparent;
-  margin-bottom: 20px;
+  margin-bottom: 46px;
 }
 
 .nav__burger {
   position: relative;
   z-index: 1;
   width: 20px;
-  height: 36px;
-  padding: 13px 0;
+  height: 10px;
+  padding: 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -81,7 +82,7 @@
 }
 
 .menu__list {
-  padding: 18px 0 10px 0;
+  padding: 36px 0 10px 0;
 }
 
 .menu__item {

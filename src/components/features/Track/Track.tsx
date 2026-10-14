@@ -36,8 +36,6 @@ export default function Track({ track, playlist }: TrackProps) {
     }
   }
 
-  errorMsg && console.error('Ошибка при лайке трека:', errorMsg)
-
   return (
     <div className={style.playlist__item} onClick={handleClickTrack}>
       <div className={style.playlist__track}>

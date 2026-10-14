@@ -18,7 +18,7 @@ export default function CategoryContent({ category }: CategoryContentProps) {
     (store) => store.tracks
   )
 
-  const loadTracks = useLoadTracks()
+  const { loadTracks } = useLoadTracks()
 
   if (fetchIsLoading) {
     return <TracksLoading />
