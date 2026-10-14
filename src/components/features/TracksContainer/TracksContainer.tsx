@@ -23,11 +23,15 @@ export default function TracksContainer({ tracks }: TracksContainerProps) {
         </div>
       </div>
       <div className={style.content__playlist}>
-        {tracks.length
-          ? tracks.map((track) => (
-              <Track key={track._id} track={track} playlist={tracks} />
-            ))
-          : 'Список треков пока пуст'}
+        {tracks.length ? (
+          tracks.map((track) => (
+            <Track key={track._id} track={track} playlist={tracks} />
+          ))
+        ) : (
+          <p className={style.content__playlistEmpty}>
+            Список треков пока пуст
+          </p>
+        )}
       </div>
     </div>
   )
