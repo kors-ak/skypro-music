@@ -1,6 +1,7 @@
 import { getCategories } from '@/services/tracksApi'
 import Image from 'next/image'
 import Link from 'next/link'
+import { toast } from 'sonner'
 import style from './sidebar.module.css'
 
 const cateroriesError = {
@@ -16,6 +17,7 @@ export default async function Sidebar() {
     .then((res) => res.filter((cat) => cat.items.length > 0))
     .catch((error) => {
       console.error(error)
+      toast.error('Не удалось загрузить категории')
       return [cateroriesError]
     })
 

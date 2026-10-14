@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import cn from 'classnames'
 import Link from 'next/link'
 import { ChangeEvent, useEffect, useRef, useState } from 'react'
+import { toast } from 'sonner'
 import ProgressBar from '../ProgressBar/ProgressBar'
 import style from './bar.module.css'
 
@@ -47,6 +48,9 @@ export default function Bar() {
       audioRef.current.play().catch((error) => {
         if (error.name !== 'AbortError') {
           console.error('Не удалось запустить аудио:', error)
+          toast.error('Не удалось запустить аудио', {
+            description: 'Попробуйте снова',
+          })
           dispatch(setIsPlaying(false))
         }
       })
@@ -125,8 +129,6 @@ export default function Bar() {
       setIsMuted(false)
     }
   }
-
-  errorMsg && console.error('Ошибка при лайке трека:', errorMsg)
 
   return (
     <div className={style.bar}>
