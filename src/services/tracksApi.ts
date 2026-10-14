@@ -51,6 +51,14 @@ export const getCategories = (): Promise<CategoryType[]> => {
     .then((res) => res.data)
 }
 
+export const getFavTracks = (access: string): Promise<TrackType[]> => {
+  return axios(`${BASE_URL}/catalog/track/favorite/all/`, {
+    headers: {
+      Authorization: `Bearer ${access}`,
+    },
+  }).then((res) => res.data.data)
+}
+
 export const addLike = (access: string, id: number): Promise<unknown> => {
   return axios.post(
     `${BASE_URL}/catalog/track/${id}/favorite/`,
