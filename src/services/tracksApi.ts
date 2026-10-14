@@ -1,4 +1,5 @@
 import { CategoryType, TrackType } from '@/sharedTypes/sharedTypes'
+import axios from 'axios'
 import { BASE_URL } from './constants'
 
 export const getTracks = (): Promise<TrackType[]> => {
@@ -48,4 +49,24 @@ export const getCategories = (): Promise<CategoryType[]> => {
       return response.json()
     })
     .then((res) => res.data)
+}
+
+export const addLike = (access: string, id: number): Promise<unknown> => {
+  return axios.post(
+    `${BASE_URL}/catalog/track/${id}/favorite/`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${access}`,
+      },
+    }
+  )
+}
+
+export const removeLike = (access: string, id: number): Promise<unknown> => {
+  return axios.delete(`${BASE_URL}/catalog/track/${id}/favorite/`, {
+    headers: {
+      Authorization: `Bearer ${access}`,
+    },
+  })
 }

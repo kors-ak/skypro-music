@@ -142,6 +142,50 @@
   color: #696969;
 }
 
+.track__likeBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    svg {
+      stroke: rgba(172, 172, 172, 1);
+    }
+  }
+
+  &:active {
+    svg {
+      stroke: rgba(255, 255, 255, 1);
+      fill: rgba(105, 105, 105, 1);
+    }
+  }
+}
+
+.track__likeBtn_loading {
+  svg {
+    stroke: rgba(255, 255, 255, 1);
+    fill: rgba(105, 105, 105, 1);
+  }
+  cursor: wait;
+}
+
+.track__likeBtn_active {
+  &:hover {
+    svg {
+      filter: opacity(0.8);
+    }
+  }
+
+  &:active {
+    svg {
+      stroke: #b672ff;
+      fill: #b672ff;
+      filter: opacity(0.6);
+    }
+  }
+}
+
 .track__timeSvg {
   width: 14px;
   height: 12px;
