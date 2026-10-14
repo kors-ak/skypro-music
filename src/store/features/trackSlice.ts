@@ -106,6 +106,7 @@ const trackSlice = createSlice({
     setFetchIsLoading: (state, action: PayloadAction<boolean>) => {
       state.fetchIsLoading = action.payload
     },
+    resetTracksState: () => initialState,
   },
 })
 
@@ -122,5 +123,6 @@ export const {
   setFavoriteTracks,
   addLikedTrack,
   removeLikedTrack,
+  resetTracksState,
 } = trackSlice.actions
 export const trackSliceReducer = trackSlice.reducer

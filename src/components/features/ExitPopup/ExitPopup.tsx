@@ -1,4 +1,4 @@
-import { setFavoriteTracks } from '@/store/features/trackSlice'
+import { resetTracksState } from '@/store/features/trackSlice'
 import { clearUserData } from '@/store/features/userSlice'
 import { useAppDispatch } from '@/store/hooks'
 import style from './ExitPopup.module.css'
@@ -11,7 +11,7 @@ export default function ExitPopup({ callback }: ExitPopupProps) {
   const dispatch = useAppDispatch()
   const exit = () => {
     dispatch(clearUserData())
-    dispatch(setFavoriteTracks([]))
+    dispatch(resetTracksState())
     callback(false)
   }
 

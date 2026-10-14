@@ -41,9 +41,13 @@ export function useLoadTracks() {
         (newToken) => getFavTracks(newToken || access),
         refresh,
         dispatch
-      ).then((favTracks) => {
-        dispatch(setFavoriteTracks(favTracks))
-      })
+      )
+        .then((favTracks) => {
+          dispatch(setFavoriteTracks(favTracks))
+        })
+        .finally(() => {
+          dispatch(setFetchIsLoading(false))
+        })
     },
     [dispatch]
   )
