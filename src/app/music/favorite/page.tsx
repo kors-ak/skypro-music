@@ -20,21 +20,25 @@ export default function FavoritePage() {
     }
   }, [username])
 
-  const { favoriteTracks, fetchIsLoading, fetchError } = useAppSelector(
-    (store) => store.tracks
-  )
+  const {
+    favoriteTracks,
+    fetchIsLoading,
+    fetchError,
+    fetchFavoritesIsLoading,
+    fetchFavoritesError,
+  } = useAppSelector((store) => store.tracks)
   const { loadTracks, loadFavoriteTracks } = useLoadTracks()
 
-  if (fetchIsLoading) {
+  if (fetchIsLoading || fetchFavoritesIsLoading) {
     return <TracksLoading />
   }
 
-  if (fetchError) {
+  if (fetchError || fetchFavoritesError) {
     return (
       <ErrorBlock
         error={{
           title: 'Ошибка загрузки',
-          subtitle: fetchError,
+          subtitle: fetchError || fetchFavoritesError,
         }}
         callback={() => {
           loadTracks()

@@ -11,6 +11,8 @@ type initialStateType = {
   favoriteTracks: TrackType[]
   fetchError: null | string
   fetchIsLoading: boolean
+  fetchFavoritesError: null | string
+  fetchFavoritesIsLoading: boolean
 }
 
 const initialState: initialStateType = {
@@ -23,6 +25,8 @@ const initialState: initialStateType = {
   favoriteTracks: [],
   fetchError: null,
   fetchIsLoading: true,
+  fetchFavoritesError: null,
+  fetchFavoritesIsLoading: false,
 }
 
 const trackSlice = createSlice({
@@ -106,6 +110,12 @@ const trackSlice = createSlice({
     setFetchIsLoading: (state, action: PayloadAction<boolean>) => {
       state.fetchIsLoading = action.payload
     },
+    setFetchFavoritesError: (state, action: PayloadAction<null | string>) => {
+      state.fetchFavoritesError = action.payload
+    },
+    setFetchFavoritesIsLoading: (state, action: PayloadAction<boolean>) => {
+      state.fetchFavoritesIsLoading = action.payload
+    },
     resetTracksState: () => initialState,
   },
 })
@@ -124,5 +134,7 @@ export const {
   addLikedTrack,
   removeLikedTrack,
   resetTracksState,
+  setFetchFavoritesError,
+  setFetchFavoritesIsLoading,
 } = trackSlice.actions
 export const trackSliceReducer = trackSlice.reducer

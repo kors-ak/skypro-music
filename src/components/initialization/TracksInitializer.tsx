@@ -6,6 +6,8 @@ import {
   setAllTracks,
   setFavoriteTracks,
   setFetchError,
+  setFetchFavoritesError,
+  setFetchFavoritesIsLoading,
   setFetchIsLoading,
 } from '@/store/features/trackSlice'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
@@ -34,8 +36,8 @@ export function useLoadTracks() {
 
   const loadFavoriteTracks = useCallback(
     (access: string, refresh: string) => {
-      dispatch(setFetchError(null))
-      dispatch(setFetchIsLoading(true))
+      dispatch(setFetchFavoritesError(null))
+      dispatch(setFetchFavoritesIsLoading(true))
 
       withReAuth(
         (newToken) => getFavTracks(newToken || access),
@@ -45,8 +47,12 @@ export function useLoadTracks() {
         .then((favTracks) => {
           dispatch(setFavoriteTracks(favTracks))
         })
+        .catch((error) => {
+          const errorText = handleTracksError(error)
+          dispatch(setFetchFavoritesError(errorText))
+        })
         .finally(() => {
-          dispatch(setFetchIsLoading(false))
+          dispatch(setFetchFavoritesIsLoading(false))
         })
     },
     [dispatch]
