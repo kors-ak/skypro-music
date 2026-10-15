@@ -2,7 +2,7 @@
 
 import { TrackType } from '@/sharedTypes/sharedTypes'
 import { getUniqueTrackValues } from '@/utils/getUniqueTrackValues'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import FilterItem from '../FilterItem/FilterItem'
 import style from './filter.module.css'
 
@@ -13,8 +13,12 @@ export default function Filter({ tracks }: { tracks: TrackType[] }) {
     setActiveFilter((prev) => (prev === name ? null : name))
   }
 
-  const getValues = (name: keyof TrackType) =>
-    getUniqueTrackValues(tracks, name)
+  const authors = useMemo(
+    () => getUniqueTrackValues(tracks, 'author'),
+    [tracks]
+  )
+
+  const genres = useMemo(() => getUniqueTrackValues(tracks, 'genre'), [tracks])
 
   return (
     <div className={style.centerblock__filter}>
@@ -24,7 +28,7 @@ export default function Filter({ tracks }: { tracks: TrackType[] }) {
         label="исполнителю"
         isOpen={activeFilter === 'author'}
         onClick={() => toggleFilter('author')}
-        items={getValues('author')}
+        items={authors}
       />
 
       <FilterItem
@@ -38,7 +42,7 @@ export default function Filter({ tracks }: { tracks: TrackType[] }) {
         label="жанру"
         isOpen={activeFilter === 'genre'}
         onClick={() => toggleFilter('genre')}
-        items={getValues('genre')}
+        items={genres}
       />
     </div>
   )
