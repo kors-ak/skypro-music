@@ -76,7 +76,7 @@ export default function TracksInitializer() {
     if (!favoriteTracks.length && access && refresh) {
       loadFavoriteTracks(access, refresh)
     }
-  }, [favoriteTracks.length, access, refresh, loadTracks])
+  }, [favoriteTracks.length, access, refresh, loadFavoriteTracks])
 
   return null
 }

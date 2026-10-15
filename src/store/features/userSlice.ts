@@ -4,12 +4,14 @@ type initialStateType = {
   username: string
   access: string
   refresh: string
+  isInitialized: boolean
 }
 
 const initialState: initialStateType = {
   username: '',
   access: '',
   refresh: '',
+  isInitialized: false,
 }
 
 const userSlice = createSlice({
@@ -36,9 +38,17 @@ const userSlice = createSlice({
       localStorage.removeItem('access')
       localStorage.removeItem('refresh')
     },
+    setUserInitialized: (state, action: PayloadAction<boolean>) => {
+      state.isInitialized = action.payload
+    },
   },
 })
 
-export const { setUserName, setAccessToken, setRefreshToken, clearUserData } =
-  userSlice.actions
+export const {
+  setUserName,
+  setAccessToken,
+  setRefreshToken,
+  clearUserData,
+  setUserInitialized,
+} = userSlice.actions
 export const userSliceReducer = userSlice.reducer

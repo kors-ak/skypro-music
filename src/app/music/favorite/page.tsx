@@ -12,13 +12,15 @@ import style from '../main/page.module.css'
 
 export default function FavoritePage() {
   const router = useRouter()
-  const { access, refresh, username } = useAppSelector((store) => store.user)
+  const { access, refresh, username, isInitialized } = useAppSelector(
+    (store) => store.user
+  )
 
   useEffect(() => {
-    if (!username) {
+    if (isInitialized && !username) {
       router.replace('/music/main')
     }
-  }, [username])
+  }, [username, router, isInitialized])
 
   const {
     favoriteTracks,
@@ -29,7 +31,7 @@ export default function FavoritePage() {
   } = useAppSelector((store) => store.tracks)
   const { loadTracks, loadFavoriteTracks } = useLoadTracks()
 
-  if (fetchIsLoading || fetchFavoritesIsLoading) {
+  if (fetchIsLoading || fetchFavoritesIsLoading || !isInitialized) {
     return <TracksLoading />
   }
 

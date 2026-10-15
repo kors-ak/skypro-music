@@ -3,6 +3,7 @@
 import {
   setAccessToken,
   setRefreshToken,
+  setUserInitialized,
   setUserName,
 } from '@/store/features/userSlice'
 import { useAppDispatch } from '@/store/hooks'
@@ -19,6 +20,7 @@ export default function UserInitializer() {
     dispatch(setUserName(username))
     dispatch(setAccessToken(access))
     dispatch(setRefreshToken(refresh))
+    dispatch(setUserInitialized(true))
   }, [dispatch])
 
   return null
