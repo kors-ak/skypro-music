@@ -1,5 +1,6 @@
 'use client'
 
+import { useLikeTrack } from '@/hooks/useLikeTrack'
 import {
   setIsPlaying,
   setNextTrack,
@@ -10,14 +11,15 @@ import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import cn from 'classnames'
 import Link from 'next/link'
 import { ChangeEvent, useEffect, useRef, useState } from 'react'
+import { toast } from 'sonner'
 import ProgressBar from '../ProgressBar/ProgressBar'
 import style from './bar.module.css'
 
 export default function Bar() {
   const dispatch = useAppDispatch()
-  const currentTrack = useAppSelector((state) => state.tracks.currentTrack)
-  const isPlaying = useAppSelector((state) => state.tracks.isPlaying)
-  const isShuffled = useAppSelector((state) => state.tracks.isShuffled)
+  const { currentTrack, isPlaying, isShuffled } = useAppSelector(
+    (state) => state.tracks
+  )
 
   const [duration, setDuration] = useState(0)
   const [currentTime, setCurrentTime] = useState(0)
@@ -27,6 +29,8 @@ export default function Bar() {
   const [isLoaded, setIsLoaded] = useState(false)
   const [isSeeking, setIsSeeking] = useState(false)
   const wasPlayingRef = useRef(false)
+  const { isLoadingLike, errorMsg, toggleLike, isLike } =
+    useLikeTrack(currentTrack)
 
   const audioRef = useRef<HTMLAudioElement | null>(null)
 
@@ -44,6 +48,9 @@ export default function Bar() {
       audioRef.current.play().catch((error) => {
         if (error.name !== 'AbortError') {
           console.error('Не удалось запустить аудио:', error)
+          toast.error('Не удалось запустить аудио', {
+            description: 'Попробуйте снова',
+          })
           dispatch(setIsPlaying(false))
         }
       })
@@ -221,18 +228,23 @@ export default function Bar() {
                 </div>
               </div>
 
-              <div className={style.trackPlay__dislike}>
-                <div className={cn(style.player__btnShuffle, style.btnIcon)}>
-                  <svg className={style.trackPlay__likeSvg}>
-                    <use xlinkHref="/img/icon/sprite.svg#icon-like"></use>
-                  </svg>
-                </div>
-                <div className={cn(style.trackPlay__dislike, style.btnIcon)}>
-                  <svg className={style.trackPlay__dislikeSvg}>
-                    <use xlinkHref="/img/icon/sprite.svg#icon-dislike"></use>
-                  </svg>
-                </div>
-              </div>
+              <button
+                className={cn(
+                  style.track__likeBtn,
+                  isLoadingLike && style.track__likeBtn_loading,
+                  isLike && style.track__likeBtn_active
+                )}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  toggleLike()
+                }}
+              >
+                <svg className={style.track__likeSvg}>
+                  <use
+                    xlinkHref={`/img/icon/sprite.svg#icon-like${isLike ? '-active' : ''}`}
+                  />
+                </svg>
+              </button>
             </div>
           </div>
           <div className={style.bar__volumeBlock}>

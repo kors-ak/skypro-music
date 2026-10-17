@@ -1,9 +1,13 @@
 'use client'
 
-import { loginUser } from '@/services/authApi'
+import { getTokens, loginUser } from '@/services/authApi'
 import { handleAuthError } from '@/services/errorHandling'
 import { FormErrors } from '@/sharedTypes/sharedTypes'
-import { setUser } from '@/store/features/userSlice'
+import {
+  setAccessToken,
+  setRefreshToken,
+  setUserName,
+} from '@/store/features/userSlice'
 import { useAppDispatch } from '@/store/hooks'
 import { validateLogin, validatePassword } from '@/utils/validation'
 import cn from 'classnames'
@@ -69,9 +73,12 @@ export default function Signin() {
 
     loginUser({ email, password })
       .then((data) => {
-        dispatch(setUser({ username: data.username, id: data._id }))
-        localStorage.setItem('username', data.username)
-        localStorage.setItem('id', String(data._id))
+        dispatch(setUserName(data.username))
+      })
+      .then(() => getTokens({ email, password }))
+      .then((data) => {
+        dispatch(setAccessToken(data.access))
+        dispatch(setRefreshToken(data.refresh))
       })
       .then(() => router.replace('/music/main'))
       .catch((error) => handleAuthError(error, setApiError))

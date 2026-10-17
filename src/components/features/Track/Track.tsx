@@ -1,5 +1,6 @@
 'use client'
 
+import { useLikeTrack } from '@/hooks/useLikeTrack'
 import { TrackType } from '@/sharedTypes/sharedTypes'
 import {
   setCurrentTrack,
@@ -20,10 +21,11 @@ type TrackProps = {
 export default function Track({ track, playlist }: TrackProps) {
   const dispatch = useAppDispatch()
   const currentTrack = useAppSelector((state) => state.tracks.currentTrack)
+  const isPlaying = useAppSelector((state) => state.tracks.isPlaying)
+  const { isLoadingLike, toggleLike, isLike } = useLikeTrack(track)
 
   const isCurrentTrack: boolean = track._id === currentTrack?._id
-  const isTrackPlaying: boolean =
-    useAppSelector((state) => state.tracks.isPlaying) && isCurrentTrack
+  const isTrackPlaying: boolean = isPlaying && isCurrentTrack
 
   const handleClickTrack = () => {
     if (isCurrentTrack) {
@@ -69,9 +71,23 @@ export default function Track({ track, playlist }: TrackProps) {
           </Link>
         </div>
         <div>
-          <svg className={style.track__timeSvg}>
-            <use xlinkHref="/img/icon/sprite.svg#icon-like"></use>
-          </svg>
+          <button
+            className={cn(
+              style.track__likeBtn,
+              isLoadingLike && style.track__likeBtn_loading,
+              isLike && style.track__likeBtn_active
+            )}
+            onClick={(e) => {
+              e.stopPropagation()
+              toggleLike()
+            }}
+          >
+            <svg className={style.track__timeSvg}>
+              <use
+                xlinkHref={`/img/icon/sprite.svg#icon-like${isLike ? '-active' : ''}`}
+              />
+            </svg>
+          </button>
           <span className={style.track__timeText}>
             {formatDuration(track.duration_in_seconds)}
           </span>

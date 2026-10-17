@@ -1,7 +1,8 @@
-import UserInitializer from '@/components/UserInitializer'
+import UserInitializer from '@/components/initialization/UserInitializer'
 import ReduxProvider from '@/store/ReduxProvider'
 import type { Metadata } from 'next'
 import { Montserrat } from 'next/font/google'
+import { Toaster } from 'sonner'
 import './globals.css'
 
 const montserrat = Montserrat({
@@ -25,6 +26,7 @@ export default function RootLayout({
         <body>
           <UserInitializer />
           {children}
+          <Toaster position="top-center" richColors={true} theme="dark" />
         </body>
       </html>
     </ReduxProvider>

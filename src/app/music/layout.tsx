@@ -1,9 +1,10 @@
-import Bar from '@/components/Bar/Bar'
-import CategoriesLoading from '@/components/CategoriesLoading/CategoriesLoading'
-import Nav from '@/components/Nav/Nav'
-import Search from '@/components/Search/Search'
-import Sidebar from '@/components/Sidebar/Sidebar'
-import UserBlock from '@/components/UserBlock/UserBlock'
+import Bar from '@/components/features/Bar/Bar'
+import Nav from '@/components/features/Nav/Nav'
+import Search from '@/components/features/Search/Search'
+import Sidebar from '@/components/features/Sidebar/Sidebar'
+import UserBlock from '@/components/features/UserBlock/UserBlock'
+import TracksInitializer from '@/components/initialization/TracksInitializer'
+import CategoriesLoading from '@/components/loading/CategoriesLoading/CategoriesLoading'
 import { ReactNode, Suspense } from 'react'
 import style from './layout.module.css'
 
@@ -16,6 +17,8 @@ export default function MusicLayout({ children }: MusicLayoutProps) {
     <div className={style.wrapper}>
       <div className={style.container}>
         <main className={style.main}>
+          <TracksInitializer />
+
           <Nav />
 
           <div className={style.centerblock}>

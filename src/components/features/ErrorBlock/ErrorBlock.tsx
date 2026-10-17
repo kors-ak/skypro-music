@@ -4,9 +4,9 @@ import style from './errorBlock.module.css'
 type ErrorBlockProps = {
   error: {
     title: string
-    subtitle: string
+    subtitle: string | null
   }
-  callback: () => Promise<void>
+  callback: (() => Promise<void>) | (() => void)
 }
 
 export default function ErrorBlock({ error, callback }: ErrorBlockProps) {

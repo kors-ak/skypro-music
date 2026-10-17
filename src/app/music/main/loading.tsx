@@ -1,4 +1,4 @@
-import FilterItem from '@/components/FilterItem/FilterItem'
+import Filter from '@/components/features/Filter/Filter'
 import cn from 'classnames'
 import style from './loading.module.css'
 
@@ -9,12 +9,7 @@ export default function TracksLoading() {
     <>
       <div className={cn(style.sceleton, style.heading)} />
 
-      <div className={style.centerblock__filter}>
-        <div className={style.filter__title}>Искать по:</div>
-        <FilterItem label="исполнителю" isOpen={false} items={[]} />
-        <FilterItem label="году выпуска" isOpen={false} items={[]} />
-        <FilterItem label="жанру" isOpen={false} items={[]} />
-      </div>
+      <Filter tracks={[]} />
 
       <div className={style.centerblock__content}>
         <div className={style.content__title}>

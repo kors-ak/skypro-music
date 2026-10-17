@@ -14,6 +14,14 @@ export type TrackType = {
   staredUser: number[]
 }
 
+export type CategoryType = {
+  _id: number
+  name?: string
+  items: number[]
+  owner: number[]
+  __v: number
+}
+
 export type FormErrors = {
   email: string
   password: string

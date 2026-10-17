@@ -41,11 +41,13 @@ export default function Nav() {
                 Главное
               </Link>
             </li>
-            <li className={style.menu__item}>
-              <Link href="#" className={style.menu__link}>
-                Мои треки
-              </Link>
-            </li>
+            {username && (
+              <li className={style.menu__item}>
+                <Link href="/music/favorite" className={style.menu__link}>
+                  Мои треки
+                </Link>
+              </li>
+            )}
             <li className={style.menu__item}>
               {username ? (
                 <p

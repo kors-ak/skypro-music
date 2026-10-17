@@ -7,11 +7,11 @@ export function getUniqueTrackValues(
   const uniqueValues = new Set<string>()
 
   arr.forEach((track) => {
-    const value = String(track[key])
+    const value = track[key]
 
     if (Array.isArray(value)) {
       value.forEach((el) => {
-        if (el) uniqueValues.add(el)
+        if (el) uniqueValues.add(String(el))
       })
     } else if (typeof value === 'string') {
       uniqueValues.add(value)

@@ -1,13 +1,6 @@
-import { TrackType } from '@/sharedTypes/sharedTypes'
+import { CategoryType, TrackType } from '@/sharedTypes/sharedTypes'
+import axios from 'axios'
 import { BASE_URL } from './constants'
-
-type CategoryType = {
-  _id: number
-  name?: string
-  items: number[]
-  owner: number[]
-  __v: number
-}
 
 export const getTracks = (): Promise<TrackType[]> => {
   return fetch(`${BASE_URL}/catalog/track/all/`, {
@@ -15,9 +8,10 @@ export const getTracks = (): Promise<TrackType[]> => {
       revalidate: 3600,
     },
   })
-    .then((response) => {
+    .then(async (response) => {
       if (!response.ok) {
-        throw new Error('Не удалось загрузить треки')
+        const data = await response.json()
+        throw new Error(data.message || 'Не удалось загрузить треки')
       }
 
       return response.json()
@@ -55,4 +49,32 @@ export const getCategories = (): Promise<CategoryType[]> => {
       return response.json()
     })
     .then((res) => res.data)
+}
+
+export const getFavTracks = (access: string): Promise<TrackType[]> => {
+  return axios(`${BASE_URL}/catalog/track/favorite/all/`, {
+    headers: {
+      Authorization: `Bearer ${access}`,
+    },
+  }).then((res) => res.data.data)
+}
+
+export const addLike = (access: string, id: number): Promise<unknown> => {
+  return axios.post(
+    `${BASE_URL}/catalog/track/${id}/favorite/`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${access}`,
+      },
+    }
+  )
+}
+
+export const removeLike = (access: string, id: number): Promise<unknown> => {
+  return axios.delete(`${BASE_URL}/catalog/track/${id}/favorite/`, {
+    headers: {
+      Authorization: `Bearer ${access}`,
+    },
+  })
 }

@@ -7,6 +7,12 @@ type initialStateType = {
   isShuffled: boolean
   playlist: TrackType[]
   shuffledPlaylist: TrackType[]
+  allTracks: TrackType[]
+  favoriteTracks: TrackType[]
+  fetchError: null | string
+  fetchIsLoading: boolean
+  fetchFavoritesError: null | string
+  fetchFavoritesIsLoading: boolean
 }
 
 const initialState: initialStateType = {
@@ -15,6 +21,12 @@ const initialState: initialStateType = {
   isShuffled: false,
   playlist: [],
   shuffledPlaylist: [],
+  allTracks: [],
+  favoriteTracks: [],
+  fetchError: null,
+  fetchIsLoading: true,
+  fetchFavoritesError: null,
+  fetchFavoritesIsLoading: false,
 }
 
 const trackSlice = createSlice({
@@ -43,6 +55,17 @@ const trackSlice = createSlice({
     },
     setPlaylist: (state, action: PayloadAction<TrackType[]>) => {
       state.playlist = action.payload
+    },
+    setFavoriteTracks: (state, action: PayloadAction<TrackType[]>) => {
+      state.favoriteTracks = action.payload
+    },
+    addLikedTrack: (state, action: PayloadAction<TrackType>) => {
+      state.favoriteTracks = [...state.favoriteTracks, action.payload]
+    },
+    removeLikedTrack: (state, action: PayloadAction<TrackType>) => {
+      state.favoriteTracks = state.favoriteTracks.filter(
+        (track) => track._id !== action.payload._id
+      )
     },
     setNextTrack: (state) => {
       const currentPlaylist = state.isShuffled
@@ -78,6 +101,22 @@ const trackSlice = createSlice({
         state.currentTrack = currentPlaylist[prevTrackIndex]
       }
     },
+    setAllTracks: (state, action: PayloadAction<TrackType[]>) => {
+      state.allTracks = action.payload
+    },
+    setFetchError: (state, action: PayloadAction<null | string>) => {
+      state.fetchError = action.payload
+    },
+    setFetchIsLoading: (state, action: PayloadAction<boolean>) => {
+      state.fetchIsLoading = action.payload
+    },
+    setFetchFavoritesError: (state, action: PayloadAction<null | string>) => {
+      state.fetchFavoritesError = action.payload
+    },
+    setFetchFavoritesIsLoading: (state, action: PayloadAction<boolean>) => {
+      state.fetchFavoritesIsLoading = action.payload
+    },
+    resetTracksState: () => initialState,
   },
 })
 
@@ -88,5 +127,14 @@ export const {
   setNextTrack,
   setPrevTrack,
   toggleIsShuffled,
+  setAllTracks,
+  setFetchError,
+  setFetchIsLoading,
+  setFavoriteTracks,
+  addLikedTrack,
+  removeLikedTrack,
+  resetTracksState,
+  setFetchFavoritesError,
+  setFetchFavoritesIsLoading,
 } = trackSlice.actions
 export const trackSliceReducer = trackSlice.reducer
