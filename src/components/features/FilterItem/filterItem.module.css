@@ -63,17 +63,26 @@
 
 .item {
   font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
   color: #ffffff;
   cursor: pointer;
-}
 
-.item:hover {
-  color: rgb(217, 182, 255);
-  text-decoration: underline;
-  text-underline-offset: 4px;
+  &:hover {
+    color: rgb(217, 182, 255);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  &:active {
+    color: rgb(182, 114, 255);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
 }
 
 .itemSelected {
-  font-weight: bold;
   color: rgb(182, 114, 255);
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }

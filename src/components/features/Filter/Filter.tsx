@@ -6,13 +6,17 @@ import {
   setFilterAuthor,
   setFilterGenre,
 } from '@/store/features/trackSlice'
-import { useAppDispatch } from '@/store/hooks'
+import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { getUniqueTrackValues } from '@/utils/getUniqueTrackValues'
 import { useMemo, useState } from 'react'
 import FilterItem from '../FilterItem/FilterItem'
 import style from './filter.module.css'
 
 export default function Filter({ tracks }: { tracks: TrackType[] }) {
+  const selectedAuthors = useAppSelector((state) => state.tracks.filter.authors)
+  const selectedGenres = useAppSelector((state) => state.tracks.filter.genre)
+  const selectedAge = useAppSelector((state) => state.tracks.filter.age)
+
   const [activeFilter, setActiveFilter] = useState<string | null>()
   const dispatch = useAppDispatch()
 
@@ -37,6 +41,7 @@ export default function Filter({ tracks }: { tracks: TrackType[] }) {
         onClick={() => toggleFilter('author')}
         items={authors}
         onSelectFilter={(el: string) => dispatch(setFilterAuthor(el))}
+        selectedItems={selectedAuthors}
       />
 
       <FilterItem
@@ -45,6 +50,7 @@ export default function Filter({ tracks }: { tracks: TrackType[] }) {
         onClick={() => toggleFilter('year')}
         items={['По умолчанию', 'Сначала новые', 'Сначала старые']}
         onSelectFilter={(el: string) => dispatch(setFilterAge(el))}
+        selectedItems={selectedAge}
       />
 
       <FilterItem
@@ -53,6 +59,7 @@ export default function Filter({ tracks }: { tracks: TrackType[] }) {
         onClick={() => toggleFilter('genre')}
         items={genres}
         onSelectFilter={(el: string) => dispatch(setFilterGenre(el))}
+        selectedItems={selectedGenres}
       />
     </div>
   )

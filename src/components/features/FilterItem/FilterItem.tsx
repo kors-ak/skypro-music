@@ -1,3 +1,4 @@
+import cn from 'classnames'
 import style from './filterItem.module.css'
 
 type FilterItemProps = {
@@ -5,6 +6,7 @@ type FilterItemProps = {
   isOpen: boolean
   onClick?: () => void
   items: string[]
+  selectedItems: string[] | string
   onSelectFilter: (name: string) => void
 }
 
@@ -13,6 +15,7 @@ export default function FilterItem({
   isOpen,
   onClick,
   items,
+  selectedItems,
   onSelectFilter,
 }: FilterItemProps) {
   return (
@@ -31,7 +34,11 @@ export default function FilterItem({
               return (
                 <li
                   key={index}
-                  className={style.item}
+                  className={cn(style.item, {
+                    [style.itemSelected]: Array.isArray(selectedItems)
+                      ? selectedItems.includes(item)
+                      : selectedItems === item,
+                  })}
                   onClick={() => onSelectFilter(item)}
                 >
                   {item}
