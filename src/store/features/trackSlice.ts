@@ -18,6 +18,7 @@ type initialStateType = {
     age: string
     genre: string[]
   }
+  search: string
 }
 
 const initialState: initialStateType = {
@@ -37,6 +38,7 @@ const initialState: initialStateType = {
     age: 'По умолчанию',
     genre: [],
   },
+  search: '',
 }
 
 const trackSlice = createSlice({
@@ -154,6 +156,9 @@ const trackSlice = createSlice({
     resetFilter: (state) => {
       state.filter = initialState.filter
     },
+    setSearch: (state, action: PayloadAction<string>) => {
+      state.search = action.payload
+    },
     resetTracksState: () => initialState,
   },
 })
@@ -178,5 +183,6 @@ export const {
   setFilterAge,
   setFilterGenre,
   resetFilter,
+  setSearch,
 } = trackSlice.actions
 export const trackSliceReducer = trackSlice.reducer

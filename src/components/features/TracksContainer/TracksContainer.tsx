@@ -1,5 +1,5 @@
 import { TrackType } from '@/sharedTypes/sharedTypes'
-import { resetFilter } from '@/store/features/trackSlice'
+import { resetFilter, setSearch } from '@/store/features/trackSlice'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import cn from 'classnames'
 import { useEffect } from 'react'
@@ -16,10 +16,12 @@ export default function TracksContainer({
   playlistId,
 }: TracksContainerProps) {
   const filter = useAppSelector((state) => state.tracks.filter)
+  const search = useAppSelector((state) => state.tracks.search)
   const dispatch = useAppDispatch()
 
   useEffect(() => {
     dispatch(resetFilter())
+    dispatch(setSearch(''))
   }, [dispatch, playlistId])
 
   const filteredTracks = [...tracks]
@@ -30,7 +32,13 @@ export default function TracksContainer({
         filter.genre.length === 0 ||
         filter.genre.some((genre) => track.genre.includes(genre))
 
-      return authorMatch && genreMatch
+      const searchMatch =
+        search === '' ||
+        track.name.toLowerCase().includes(search.toLowerCase()) ||
+        track.author.toLowerCase().includes(search.toLowerCase()) ||
+        track.album.toLowerCase().includes(search.toLowerCase())
+
+      return authorMatch && genreMatch && searchMatch
     })
     .sort((a, b) => {
       if (filter.age === 'По умолчанию') {
@@ -70,9 +78,11 @@ export default function TracksContainer({
           ))
         ) : (
           <p className={style.content__playlistEmpty}>
-            {filter.authors.length === 0 && filter.genre.length === 0
+            {filter.authors.length === 0 &&
+            filter.genre.length === 0 &&
+            search === ''
               ? 'Список треков пока пуст'
-              : 'Не удалось найти треки, соответствующие данным фильтрам'}
+              : 'По вашему запросу ничего не найдено. Попробуйте изменить фильтры или поисковый запрос'}
           </p>
         )}
       </div>
