@@ -38,25 +38,28 @@ export default function FilterItem({
       </button>
 
       {isOpen && (
-        <div className={style.dropdown}>
-          <ul className={style.list}>
-            {items.map((item, index) => {
-              return (
-                <li
-                  key={index}
-                  className={cn(style.item, {
-                    [style.itemSelected]: Array.isArray(selectedItems)
-                      ? selectedItems.includes(item)
-                      : selectedItems === item,
-                  })}
-                  onClick={() => onSelectFilter(item)}
-                >
-                  {item}
-                </li>
-              )
-            })}
-          </ul>
-        </div>
+        <>
+          <div className={style.dropdown}>
+            <ul className={style.list}>
+              {items.map((item, index) => {
+                return (
+                  <li
+                    key={index}
+                    className={cn(style.item, {
+                      [style.itemSelected]: Array.isArray(selectedItems)
+                        ? selectedItems.includes(item)
+                        : selectedItems === item,
+                    })}
+                    onClick={() => onSelectFilter(item)}
+                  >
+                    {item}
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+          <div className={style.overflow} onClick={onClick}></div>
+        </>
       )}
     </div>
   )
