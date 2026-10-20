@@ -3,7 +3,7 @@
 }
 
 .filter__button {
-  /*composes: btn-text from '/src/UI/Button/button.module.css';*/
+  display: block;
   position: relative;
   font-style: normal;
   font-weight: 400;
@@ -27,6 +27,26 @@
 .active {
   border-color: rgb(154, 72, 241);
   color: rgb(182, 114, 255);
+}
+
+.tab {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  top: -8px;
+  right: -8px;
+  border-radius: 50%;
+  background: rgba(173, 97, 255, 1);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: 400;
+  font-size: 13px;
+  color: #fff;
+
+  z-index: 10;
 }
 
 .dropdown {

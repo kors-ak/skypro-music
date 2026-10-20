@@ -18,6 +18,10 @@ export default function FilterItem({
   selectedItems,
   onSelectFilter,
 }: FilterItemProps) {
+  const addTab = Array.isArray(selectedItems)
+    ? selectedItems.length > 0
+    : selectedItems !== 'По умолчанию'
+
   return (
     <div className={style.wrapper}>
       <button
@@ -25,6 +29,12 @@ export default function FilterItem({
         onClick={onClick}
       >
         {label}
+
+        {addTab && (
+          <div className={style.tab}>
+            {Array.isArray(selectedItems) ? selectedItems.length : 1}
+          </div>
+        )}
       </button>
 
       {isOpen && (
