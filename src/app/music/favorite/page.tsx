@@ -53,10 +53,8 @@ export default function FavoritePage() {
   return (
     <>
       <h2 className={style.heading}>Мои треки</h2>
-
       <Filter tracks={favoriteTracks} />
-
-      <TracksContainer tracks={favoriteTracks} />
+      <TracksContainer tracks={favoriteTracks} playlistId="favorites" />
     </>
   )
 }

@@ -34,7 +34,7 @@ export default function HomePage() {
     <>
       <h2 className={style.heading}>Треки</h2>
       <Filter tracks={allTracks} />
-      <TracksContainer tracks={allTracks} />
+      <TracksContainer tracks={allTracks} playlistId="all" />
     </>
   )
 }

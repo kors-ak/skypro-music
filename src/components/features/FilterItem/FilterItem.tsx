@@ -5,6 +5,7 @@ type FilterItemProps = {
   isOpen: boolean
   onClick?: () => void
   items: string[]
+  onSelectFilter: (name: string) => void
 }
 
 export default function FilterItem({
@@ -12,6 +13,7 @@ export default function FilterItem({
   isOpen,
   onClick,
   items,
+  onSelectFilter,
 }: FilterItemProps) {
   return (
     <div className={style.wrapper}>
@@ -27,7 +29,11 @@ export default function FilterItem({
           <ul className={style.list}>
             {items.map((item, index) => {
               return (
-                <li key={index} className={style.item}>
+                <li
+                  key={index}
+                  className={style.item}
+                  onClick={() => onSelectFilter(item)}
+                >
                   {item}
                 </li>
               )
