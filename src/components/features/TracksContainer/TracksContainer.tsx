@@ -66,7 +66,7 @@ export default function TracksContainer({
       <div className={style.content__playlist}>
         {filteredTracks.length ? (
           filteredTracks.map((track) => (
-            <Track key={track._id} track={track} playlist={tracks} />
+            <Track key={track._id} track={track} playlist={filteredTracks} />
           ))
         ) : (
           <p className={style.content__playlistEmpty}>

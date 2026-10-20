@@ -29,8 +29,7 @@ export default function Bar() {
   const [isLoaded, setIsLoaded] = useState(false)
   const [isSeeking, setIsSeeking] = useState(false)
   const wasPlayingRef = useRef(false)
-  const { isLoadingLike, errorMsg, toggleLike, isLike } =
-    useLikeTrack(currentTrack)
+  const { isLoadingLike, toggleLike, isLike } = useLikeTrack(currentTrack)
 
   const audioRef = useRef<HTMLAudioElement | null>(null)
 
