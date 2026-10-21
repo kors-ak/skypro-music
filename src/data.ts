@@ -132,4 +132,17 @@ export const data: TrackType[] = [
       'https://webdev-music-003b5b991590.herokuapp.com/media/music_files/Winniethemoog_-_Action_Sport_Breakbeat.mp3',
     staredUser: [],
   },
+  {
+    _id: 18,
+    name: 'Hard Metal Intro',
+    author: 'Winniethemoog',
+    release_date: '2004-10-01',
+    genre: ['Рок музыка'],
+    duration_in_seconds: 206,
+    album: 'Cinematic',
+    logo: null,
+    track_file:
+      'https://webdev-music-003b5b991590.herokuapp.com/media/music_files/Winniethemoog_-_Hard_Metal_Intro.mp3',
+    staredUser: [],
+  },
 ]
