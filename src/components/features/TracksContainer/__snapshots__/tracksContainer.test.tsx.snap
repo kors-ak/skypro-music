@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`TracksContainer Соответствует снапшоту 1`] = `
+<DocumentFragment>
+  <div
+    class="centerblock__content"
+  >
+    <div
+      class="content__title"
+    >
+      <div
+        class="playlistTitle__col col01"
+      >
+        Трек
+      </div>
+      <div
+        class="playlistTitle__col col02"
+      >
+        Исполнитель
+      </div>
+      <div
+        class="playlistTitle__col col03"
+      >
+        Альбом
+      </div>
+      <div
+        class="playlistTitle__col col04"
+      >
+        <svg
+          class="playlistTitle__svg"
+        >
+          <use
+            xlink:href="/img/icon/sprite.svg#icon-watch"
+          />
+        </svg>
+      </div>
+    </div>
+    <div
+      class="content__playlist"
+    >
+      <div
+        data-testid="track"
+      >
+        Chase
+      </div>
+      <div
+        data-testid="track"
+      >
+        Open Sea epic
+      </div>
+      <div
+        data-testid="track"
+      >
+        Sneaky Snitch
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
