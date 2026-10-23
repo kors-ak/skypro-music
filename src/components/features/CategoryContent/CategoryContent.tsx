@@ -5,6 +5,7 @@ import Filter from '@/components/features/Filter/Filter'
 import TracksContainer from '@/components/features/TracksContainer/TracksContainer'
 import { useLoadTracks } from '@/components/initialization/TracksInitializer'
 import TracksLoading from '@/components/loading/TracksLoading/TracksLoading'
+import { useIsHydrated } from '@/hooks/useIsHydrated'
 import { CategoryType } from '@/sharedTypes/sharedTypes'
 import { useAppSelector } from '@/store/hooks'
 import style from './categoryContent.module.css'
@@ -18,9 +19,10 @@ export default function CategoryContent({ category }: CategoryContentProps) {
     (store) => store.tracks
   )
 
+  const isHydrated = useIsHydrated()
   const { loadTracks } = useLoadTracks()
 
-  if (fetchIsLoading) {
+  if (!isHydrated || fetchIsLoading) {
     return <TracksLoading />
   }
 

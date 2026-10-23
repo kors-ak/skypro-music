@@ -61,7 +61,6 @@ export default function Bar() {
   useEffect(() => {
     if (!isPlaying || isSeeking) return
 
-    // отвечает за плавность заполнения полосы прогресса трека
     let animationFrameId: number
 
     const updateProgress = () => {
