@@ -1,5 +1,5 @@
 import CategoryContent from '@/components/features/CategoryContent/CategoryContent'
-import { getCategoryTraks } from '@/services/tracksApi'
+import { getCategoryTracks } from '@/services/tracksApi'
 
 type CategoryPageProps = {
   params: Promise<{
@@ -10,7 +10,7 @@ type CategoryPageProps = {
 export default async function CategoryPage({ params }: CategoryPageProps) {
   const { id } = await params
 
-  const category = await getCategoryTraks(Number(id))
+  const category = await getCategoryTracks(Number(id))
 
   return <CategoryContent category={category} />
 }
