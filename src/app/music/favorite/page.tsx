@@ -4,6 +4,7 @@ import ErrorBlock from '@/components/features/ErrorBlock/ErrorBlock'
 import Filter from '@/components/features/Filter/Filter'
 import TracksContainer from '@/components/features/TracksContainer/TracksContainer'
 import { useLoadTracks } from '@/components/initialization/TracksInitializer'
+import { useIsHydrated } from '@/hooks/useIsHydrated'
 import { useAppSelector } from '@/store/hooks'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
@@ -12,6 +13,7 @@ import style from '../main/page.module.css'
 
 export default function FavoritePage() {
   const router = useRouter()
+  const isHydrated = useIsHydrated()
   const { access, refresh, username, isInitialized } = useAppSelector(
     (store) => store.user
   )
@@ -31,7 +33,12 @@ export default function FavoritePage() {
   } = useAppSelector((store) => store.tracks)
   const { loadTracks, loadFavoriteTracks } = useLoadTracks()
 
-  if (fetchIsLoading || fetchFavoritesIsLoading || !isInitialized) {
+  if (
+    !isHydrated ||
+    fetchIsLoading ||
+    fetchFavoritesIsLoading ||
+    !isInitialized
+  ) {
     return <TracksLoading />
   }
 
