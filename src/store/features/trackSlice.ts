@@ -13,6 +13,12 @@ type initialStateType = {
   fetchIsLoading: boolean
   fetchFavoritesError: null | string
   fetchFavoritesIsLoading: boolean
+  filter: {
+    authors: string[]
+    age: string
+    genre: string[]
+  }
+  search: string
 }
 
 const initialState: initialStateType = {
@@ -27,6 +33,12 @@ const initialState: initialStateType = {
   fetchIsLoading: true,
   fetchFavoritesError: null,
   fetchFavoritesIsLoading: false,
+  filter: {
+    authors: [],
+    age: 'По умолчанию',
+    genre: [],
+  },
+  search: '',
 }
 
 const trackSlice = createSlice({
@@ -116,6 +128,37 @@ const trackSlice = createSlice({
     setFetchFavoritesIsLoading: (state, action: PayloadAction<boolean>) => {
       state.fetchFavoritesIsLoading = action.payload
     },
+    setFilterAuthor: (state, action: PayloadAction<string>) => {
+      const author = action.payload
+      if (state.filter.authors.includes(author)) {
+        state.filter.authors = state.filter.authors.filter(
+          (item) => item !== author
+        )
+      } else {
+        state.filter.authors = [...state.filter.authors, author]
+      }
+    },
+    setFilterAge: (state, action: PayloadAction<string>) => {
+      if (state.filter.age === action.payload) {
+        state.filter.age = 'По умолчанию'
+      } else {
+        state.filter.age = action.payload
+      }
+    },
+    setFilterGenre: (state, action: PayloadAction<string>) => {
+      const genre = action.payload
+      if (state.filter.genre.includes(genre)) {
+        state.filter.genre = state.filter.genre.filter((item) => item !== genre)
+      } else {
+        state.filter.genre = [...state.filter.genre, genre]
+      }
+    },
+    resetFilter: (state) => {
+      state.filter = initialState.filter
+    },
+    setSearch: (state, action: PayloadAction<string>) => {
+      state.search = action.payload
+    },
     resetTracksState: () => initialState,
   },
 })
@@ -136,5 +179,10 @@ export const {
   resetTracksState,
   setFetchFavoritesError,
   setFetchFavoritesIsLoading,
+  setFilterAuthor,
+  setFilterAge,
+  setFilterGenre,
+  resetFilter,
+  setSearch,
 } = trackSlice.actions
 export const trackSliceReducer = trackSlice.reducer

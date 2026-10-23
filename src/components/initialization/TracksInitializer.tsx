@@ -2,6 +2,7 @@
 
 import { handleTracksError } from '@/services/errorHandling'
 import { getFavTracks, getTracks } from '@/services/tracksApi'
+import { withReAuth } from '@/services/withReAuth'
 import {
   setAllTracks,
   setFavoriteTracks,
@@ -11,7 +12,6 @@ import {
   setFetchIsLoading,
 } from '@/store/features/trackSlice'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
-import { withReAuth } from '@/utils/withReAuth'
 import { useCallback, useEffect } from 'react'
 
 export function useLoadTracks() {

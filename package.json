@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "format": "prettier --write **/*.{js,jsx,ts,tsx,css,scss,json,md}"
+    "format": "prettier --write **/*.{js,jsx,ts,tsx,css,scss,json,md}",
+    "test": "jest"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.12.0",
@@ -22,6 +23,11 @@
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^16.2.10",
+    "@testing-library/dom": "^10.4.2",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.8",
+    "@types/jest": "^30.0.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
@@ -31,7 +37,10 @@
     "eslint-config-next": "16.2.10",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.6",
+    "jest": "^30.5.2",
+    "jest-environment-jsdom": "^30.5.2",
     "prettier": "^3.9.5",
+    "ts-node": "^10.9.2",
     "typescript": "^5"
   },
   "allowScripts": {

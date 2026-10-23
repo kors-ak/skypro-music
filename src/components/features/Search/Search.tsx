@@ -1,13 +1,15 @@
 'use client'
 
-import { useState } from 'react'
+import { setSearch } from '@/store/features/trackSlice'
+import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import style from './search.module.css'
 
 export default function Search() {
-  const [searchValue, setSearchValue] = useState('')
+  const dispatch = useAppDispatch()
+  const search = useAppSelector((state) => state.tracks.search)
 
   const onSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(e.target.value)
+    dispatch(setSearch(e.target.value))
   }
 
   return (
@@ -20,7 +22,7 @@ export default function Search() {
         type="search"
         placeholder="Поиск"
         name="search"
-        value={searchValue}
+        value={search || ''}
         onChange={onSearchChange}
       />
     </div>

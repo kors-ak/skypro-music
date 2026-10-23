@@ -43,10 +43,11 @@ export default function CategoryContent({ category }: CategoryContentProps) {
   return (
     <>
       <h2 className={style.heading}>{category.name}</h2>
-
       <Filter tracks={categoryTracks} />
-
-      <TracksContainer tracks={categoryTracks} />
+      <TracksContainer
+        tracks={categoryTracks}
+        playlistId={String(category._id)}
+      />
     </>
   )
 }

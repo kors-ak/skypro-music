@@ -1,7 +1,7 @@
 import { setAccessToken } from '@/store/features/userSlice'
 import { AppDispatch } from '@/store/store'
 import { AxiosError } from 'axios'
-import { refreshToken } from '../services/authApi'
+import { refreshToken } from './authApi'
 
 export const withReAuth = async <T>(
   apiFunction: (access: string) => Promise<T>,

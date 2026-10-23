@@ -11,9 +11,27 @@ export default function TracksLoading() {
 
       <div className={style.centerblock__filter}>
         <div className={style.filter__title}>Искать по:</div>
-        <FilterItem label="исполнителю" isOpen={false} items={[]} />
-        <FilterItem label="году выпуска" isOpen={false} items={[]} />
-        <FilterItem label="жанру" isOpen={false} items={[]} />
+        <FilterItem
+          label="исполнителю"
+          isOpen={false}
+          items={[]}
+          selectedItems={[]}
+          onSelectFilter={() => {}}
+        />
+        <FilterItem
+          label="году выпуска"
+          isOpen={false}
+          items={[]}
+          selectedItems={[]}
+          onSelectFilter={() => {}}
+        />
+        <FilterItem
+          label="жанру"
+          isOpen={false}
+          items={[]}
+          selectedItems={[]}
+          onSelectFilter={() => {}}
+        />
       </div>
 
       <div className={style.centerblock__content}>

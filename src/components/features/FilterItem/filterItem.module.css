@@ -3,7 +3,7 @@
 }
 
 .filter__button {
-  /*composes: btn-text from '/src/UI/Button/button.module.css';*/
+  display: block;
   position: relative;
   font-style: normal;
   font-weight: 400;
@@ -17,6 +17,7 @@
   color: #fff;
   margin-right: 10px;
   transition: all 0.1s;
+  z-index: 10;
 }
 
 .filter__button:hover {
@@ -29,6 +30,26 @@
   color: rgb(182, 114, 255);
 }
 
+.tab {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  top: -8px;
+  right: -8px;
+  border-radius: 50%;
+  background: rgba(173, 97, 255, 1);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: 400;
+  font-size: 13px;
+  color: #fff;
+
+  z-index: 10;
+}
+
 .dropdown {
   position: absolute;
   top: 49px;
@@ -36,7 +57,7 @@
   background: #313131;
   border-radius: 12px;
   padding: 34px;
-  z-index: 10;
+  z-index: 20;
   overflow: hidden;
 }
 
@@ -63,17 +84,32 @@
 
 .item {
   font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
   color: #ffffff;
   cursor: pointer;
+
+  &:hover {
+    color: rgb(217, 182, 255);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  &:active {
+    color: rgb(182, 114, 255);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
 }
 
-.item:hover {
-  color: rgb(217, 182, 255);
+.itemSelected {
+  color: rgb(182, 114, 255);
   text-decoration: underline;
   text-underline-offset: 4px;
 }
 
-.itemSelected {
-  font-weight: bold;
-  color: rgb(182, 114, 255);
+.overflow {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
 }

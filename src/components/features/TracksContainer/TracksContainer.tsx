@@ -1,13 +1,62 @@
 import { TrackType } from '@/sharedTypes/sharedTypes'
+import { resetFilter, setSearch } from '@/store/features/trackSlice'
+import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import cn from 'classnames'
+import { useEffect } from 'react'
 import Track from '../Track/Track'
 import style from './trackscontainer.module.css'
 
 type TracksContainerProps = {
   tracks: TrackType[]
+  playlistId: string
 }
 
-export default function TracksContainer({ tracks }: TracksContainerProps) {
+export default function TracksContainer({
+  tracks,
+  playlistId,
+}: TracksContainerProps) {
+  const filter = useAppSelector((state) => state.tracks.filter)
+  const search = useAppSelector((state) => state.tracks.search)
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    dispatch(resetFilter())
+    dispatch(setSearch(''))
+  }, [dispatch, playlistId])
+
+  const filteredTracks = [...tracks]
+    .filter((track) => {
+      const authorMatch =
+        filter.authors.length === 0 || filter.authors.includes(track.author)
+      const genreMatch =
+        filter.genre.length === 0 ||
+        filter.genre.some((genre) => track.genre.includes(genre))
+
+      const searchMatch =
+        search === '' ||
+        track.name.toLowerCase().includes(search.toLowerCase()) ||
+        track.author.toLowerCase().includes(search.toLowerCase()) ||
+        track.album.toLowerCase().includes(search.toLowerCase())
+
+      return authorMatch && genreMatch && searchMatch
+    })
+    .sort((a, b) => {
+      if (filter.age === 'По умолчанию') {
+        return 0
+      } else if (filter.age === 'Сначала новые') {
+        return (
+          new Date(b.release_date).getTime() -
+          new Date(a.release_date).getTime()
+        )
+      } else if (filter.age === 'Сначала старые') {
+        return (
+          new Date(a.release_date).getTime() -
+          new Date(b.release_date).getTime()
+        )
+      }
+      return 0
+    })
+
   return (
     <div className={style.centerblock__content}>
       <div className={style.content__title}>
@@ -23,13 +72,17 @@ export default function TracksContainer({ tracks }: TracksContainerProps) {
         </div>
       </div>
       <div className={style.content__playlist}>
-        {tracks.length ? (
-          tracks.map((track) => (
-            <Track key={track._id} track={track} playlist={tracks} />
+        {filteredTracks.length ? (
+          filteredTracks.map((track) => (
+            <Track key={track._id} track={track} playlist={filteredTracks} />
           ))
         ) : (
           <p className={style.content__playlistEmpty}>
-            Список треков пока пуст
+            {filter.authors.length === 0 &&
+            filter.genre.length === 0 &&
+            search === ''
+              ? 'Список треков пока пуст'
+              : 'По вашему запросу ничего не найдено. Попробуйте изменить фильтры или поисковый запрос'}
           </p>
         )}
       </div>

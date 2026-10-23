@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Filter Соответствует снапшоту 1`] = `
+<DocumentFragment>
+  <div
+    class="centerblock__filter"
+  >
+    <div
+      class="filter__title"
+    >
+      Искать по:
+    </div>
+    <div
+      class="wrapper"
+    >
+      <button
+        class="filter__button "
+      >
+        исполнителю
+      </button>
+    </div>
+    <div
+      class="wrapper"
+    >
+      <button
+        class="filter__button "
+      >
+        году выпуска
+      </button>
+    </div>
+    <div
+      class="wrapper"
+    >
+      <button
+        class="filter__button "
+      >
+        жанру
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;

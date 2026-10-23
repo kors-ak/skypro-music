@@ -1,4 +1,4 @@
-export const EMAIL_REGEX = /^[^\s@]{3,}@[^\s@]+\.[^\s@]+$/
+export const EMAIL_REGEX = /^[^\s@]{3,}@[^.\s@]+(?:\.[^.\s@]+)+$/
 
 export const validateLogin = (value: string) => {
   const emailValue = value.trim()
