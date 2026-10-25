@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { ReactNode } from 'react'
-import style from './layuot.module.css'
+import style from './layout.module.css'
 
 type AuthLayoutProps = {
   children: ReactNode

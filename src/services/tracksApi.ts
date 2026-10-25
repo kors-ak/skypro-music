@@ -19,8 +19,8 @@ export const getTracks = (): Promise<TrackType[]> => {
     .then((res) => res.data)
 }
 
-export const getCategoryTraks = (id: number): Promise<CategoryType> => {
-  return fetch(`${BASE_URL}/catalog/selection/${++id}/`, {
+export const getCategoryTracks = (id: number): Promise<CategoryType> => {
+  return fetch(`${BASE_URL}/catalog/selection/${id + 1}/`, {
     next: {
       revalidate: 3600,
     },
