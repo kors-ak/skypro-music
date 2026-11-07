@@ -50,6 +50,22 @@
   cursor: pointer;
 }
 
+.nav__burger_active {
+  .burger__line {
+    &:nth-child(1) {
+      transform: translateY(4.5px) rotate(-45deg);
+    }
+
+    &:nth-child(2) {
+      opacity: 0;
+    }
+
+    &:nth-child(3) {
+      transform: translateY(-4.5px) rotate(45deg);
+    }
+  }
+}
+
 .menuWrapper {
   transform: translateX(-200px);
   pointer-events: none;
@@ -79,6 +95,7 @@
   width: 100%;
   height: 1px;
   background-color: #d3d3d3;
+  transition: all 0.2s ease 0.1s;
 }
 
 .menu__list {
