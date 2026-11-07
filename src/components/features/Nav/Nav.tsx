@@ -28,7 +28,10 @@ export default function Nav() {
           alt={'logo'}
         />
       </Link>
-      <div className={style.nav__burger} onClick={handleMenuToggle}>
+      <div
+        className={cn(style.nav__burger, isOpen && style.nav__burger_active)}
+        onClick={handleMenuToggle}
+      >
         <span className={style.burger__line}></span>
         <span className={style.burger__line}></span>
         <span className={style.burger__line}></span>
